@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import styles from './ScrollBox.module.css';
 
@@ -21,6 +21,16 @@ const ScrollBox = ({ x, y, zoom, width, height, localWidth, localHeight, setX, s
     setDrag(true);
   };
 
+  useEffect(() => {
+    const onMouseUp = () => setDrag(false);
+
+    window.addEventListener('mouseup', onMouseUp);
+
+    return () => {
+      window.removeEventListener('mousemove', onMouseUp)
+    }
+  }, [])
+
   const style = {
     top: y,
     left: x,
@@ -35,8 +45,6 @@ const ScrollBox = ({ x, y, zoom, width, height, localWidth, localHeight, setX, s
       style={style}
       className={styles.scrollbox}
       onMouseDown={onMouseDown}
-      onMouseUp={() => setDrag(false)}
-      onMouseLeave={() => setDrag(false)}
       onMouseMove={onMouseMove}
     />
   );
