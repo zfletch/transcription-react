@@ -6,8 +6,8 @@ import Navigator from '../../Navigator';
 
 const NavigatorWithContext = () => (
   <TranscriptionContext.Consumer>
-    {({ image, x, y, setX, setY }) => (
-      <Navigator image={image} x={x} y={y} setX={setX} setY={setY} />
+    {({ image, x, y, zoom, height, width, setX, setY }) => (
+      <Navigator image={image} x={x} y={y} zoom={zoom} height={height} width={width} setX={setX} setY={setY} />
     )}
   </TranscriptionContext.Consumer>
 );

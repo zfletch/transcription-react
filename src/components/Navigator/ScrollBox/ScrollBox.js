@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 import styles from './ScrollBox.module.css';
 
-const ScrollBox = ({ x, y, setX, setY }) => {
+const ScrollBox = ({ x, y, zoom, width, height, localWidth, localHeight, setX, setY }) => {
   const [drag, setDrag] = useState(false);
   const [offsetX, setOffsetX] = useState(null);
   const [offsetY, setOffsetY] = useState(null);
@@ -21,9 +21,18 @@ const ScrollBox = ({ x, y, setX, setY }) => {
     setDrag(true);
   };
 
+  const style = {
+    top: y,
+    left: x,
+    // height: `${(height / zoom) * (height / localHeight)}px`,
+    // width: `${(width / zoom) * (width / localWidth)}px`,
+    height: `${height / zoom}px`,
+    width: `${width / zoom}px`,
+  };
+
   return (
     <div
-      style={{ top: y, left: x }}
+      style={style}
       className={styles.scrollbox}
       onMouseDown={onMouseDown}
       onMouseUp={() => setDrag(false)}

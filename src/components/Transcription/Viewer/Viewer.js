@@ -6,7 +6,7 @@ import Viewer from '../../Viewer';
 
 const ViewerWithContext = () => (
   <TranscriptionContext.Consumer>
-    {({ image, x, y }) => <Viewer image={image} x={x} y={y} />}
+    {({ image, x, y, zoom, setWidth, setHeight }) => <Viewer image={image} x={x} y={y} zoom={zoom} setWidth={setWidth} setHeight={setHeight} />}
   </TranscriptionContext.Consumer>
 );
 

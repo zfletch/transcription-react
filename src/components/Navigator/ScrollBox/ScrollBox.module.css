@@ -1,11 +1,10 @@
 .scrollbox {
   position: absolute;
 
-  height: 100px;
-  width: 100px;
-
-  background-color: #edeb66;
+  background-color: #ccccc6;
   opacity: 0.4;
+  border-width: 2px;
+  border-style: dashed;
 
   cursor: grab;
 }

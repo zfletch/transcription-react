@@ -1,23 +1,28 @@
 import React, { useEffect, useRef } from 'react';
 
-const Viewer = ({ image, setRatio, x, y, width, height }) => {
+import styles from './Viewer.module.css';
+
+const Viewer = ({ image, x, y, zoom, setWidth, setHeight }) => {
   const ref = useRef(null);
 
   useEffect(() => {
-    const ratio = ref.current.clientHeight / ref.current.clientWidth;
+    const height = ref.current.clientHeight;
+    const width = ref.current.clientWidth;
 
-    if (setRatio) {
-      setRatio(ratio);
-    }
+    setHeight(height);
+    setWidth(width);
   });
 
   const style = {
     backgroundImage: `url(${image})`,
-    backgroundPosition: `${x}px ${y}px`,
+    backgroundPosition: `-${zoom * x}px -${zoom * y}px`,
+    backgroundSize: `${zoom * 100}%`,
   }
 
   return (
-    <div ref={ref}
+    <div
+      ref={ref}
+      className={styles.viewer}
       style={style}
     />
   );
