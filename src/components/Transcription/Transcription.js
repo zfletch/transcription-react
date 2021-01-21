@@ -8,9 +8,10 @@ const Transcription = ({ image, className, children }) => {
   const [height, setHeight] = useState(null);
   const [width, setWidth] = useState(null);
   const [zoom, setZoom] = useState(2);
+  const [boxes, setBoxes] = useState([{ x: 100, y: 200, width: 100, height: 100 }]);
 
   return (
-    <TranscriptionContext.Provider value={{ image, x, y, zoom, height, width, setX, setY, setZoom, setHeight, setWidth }}>
+    <TranscriptionContext.Provider value={{ image, x, y, zoom, height, width, boxes, setX, setY, setZoom, setHeight, setWidth, setBoxes }}>
       <div className={className}>
         {children}
       </div>

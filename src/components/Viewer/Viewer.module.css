@@ -1,4 +1,13 @@
 .viewer {
   background-repeat: no-repeat;
   background-position: center;
+
+  position: relative;
+}
+
+.box {
+  position: absolute;
+
+  background-color: #edeb66;
+  opacity: 0.4;
 }
