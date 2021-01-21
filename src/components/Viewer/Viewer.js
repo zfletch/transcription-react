@@ -69,16 +69,16 @@ const Viewer = ({ image, x, y, width, height, zoom, boxes, setWidth, setHeight, 
     );
   };
 
-  const onMouseMove = ({ screenX, screenY }) => {
+  const onMouseMove = ({ clientX, clientY }) => {
     if (select) {
-      setSelectWidth(screenX - selectX - 11);
-      setSelectHeight(screenY - selectY - 106);
+      setSelectWidth(clientX - selectX - 10);
+      setSelectHeight(clientY - selectY - 10);
     }
   };
 
-  const onMouseDown = ({ screenX, screenY }) => {
-    setSelectX(screenX - 11);
-    setSelectY(screenY - 106);
+  const onMouseDown = ({ clientX, clientY }) => {
+    setSelectX(clientX - 10);
+    setSelectY(clientY - 10);
 
     setSelect(true);
   };
