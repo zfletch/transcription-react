@@ -12,7 +12,6 @@ const Navigator = ({ image, x, y, zoom, width, height, setX, setY }) => {
   useEffect(() => {
     const lh = ref.current.clientHeight;
     const lw = ref.current.clientWidth;
-    console.log([lh,lw])
 
     setLocalHeight(lh);
     setLocalWidth(lw);

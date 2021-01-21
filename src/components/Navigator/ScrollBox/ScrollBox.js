@@ -2,15 +2,19 @@ import React, { useEffect, useState } from 'react';
 
 import styles from './ScrollBox.module.css';
 
+const max = (a, b) => (
+  a > b ? a : b
+);
+
 const ScrollBox = ({ x, y, zoom, width, height, localWidth, localHeight, setX, setY }) => {
   const [drag, setDrag] = useState(false);
   const [offsetX, setOffsetX] = useState(null);
   const [offsetY, setOffsetY] = useState(null);
 
   const onMouseMove = ({ screenX, screenY }) => {
-    if (drag) {
-      setX(screenX - offsetX);
-      setY(screenY - offsetY);
+    if (drag && x >= 0 && y >= 0) {
+      setX(max(screenX - offsetX, 0));
+      setY(max(screenY - offsetY, 0));
     }
   };
 

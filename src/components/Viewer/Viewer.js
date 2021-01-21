@@ -1,8 +1,13 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 import styles from './Viewer.module.css';
 
 const Viewer = ({ image, x, y, width, height, zoom, boxes, setWidth, setHeight, setBoxes }) => {
+  const [select, setSelect] = useState(false);
+  const [selectX, setSelectX] = useState(null);
+  const [selectY, setSelectY] = useState(null);
+  const [selectWidth, setSelectWidth] = useState(0);
+  const [selectHeight, setSelectHeight] = useState(0);
   const ref = useRef(null);
 
   useEffect(() => {
@@ -11,17 +16,9 @@ const Viewer = ({ image, x, y, width, height, zoom, boxes, setWidth, setHeight, 
 
     setHeight(height);
     setWidth(width);
-  });
+  }, []);
 
   const renderBox = ({ x: boxX, y: boxY, width: boxWidth, height: boxHeight }, key) => {
-    // if (boxX < x
-    //   || boxY < y
-    //   || boxX > ((x + width) * zoom)
-    //   || boxY > ((y + height) * zoom)) {
-    //
-    //   return false;
-    // }
-
     const style = {
       top: (boxY - y) * zoom,
       left: (boxX - x) * zoom,
@@ -38,6 +35,53 @@ const Viewer = ({ image, x, y, width, height, zoom, boxes, setWidth, setHeight, 
     );
   };
 
+  const onMouseUp = () => {
+    const newBoxes = boxes.concat({
+      x: x + selectX / zoom,
+      y: y + selectY / zoom,
+      width: selectWidth / zoom,
+      height: selectHeight / zoom,
+    });
+
+    setBoxes(newBoxes);
+    setSelect(false);
+    setSelectWidth(null);
+    setSelectHeight(null);
+  };
+
+  const renderSelect = () => {
+    if (!select) {
+      return false;
+    }
+
+    const style = {
+      top: selectY,
+      left: selectX,
+      height: `${selectHeight}px`,
+      width: `${selectWidth}px`,
+    };
+
+    return (
+      <div
+        style={style}
+        className={styles.select}
+      />
+    );
+  };
+
+  const onMouseMove = ({ screenX, screenY }) => {
+    if (select) {
+      setSelectWidth(screenX - selectX - 11);
+      setSelectHeight(screenY - selectY - 106);
+    }
+  };
+
+  const onMouseDown = ({ screenX, screenY }) => {
+    setSelectX(screenX - 11);
+    setSelectY(screenY - 106);
+
+    setSelect(true);
+  };
 
   const style = {
     backgroundImage: `url(${image})`,
@@ -50,7 +94,11 @@ const Viewer = ({ image, x, y, width, height, zoom, boxes, setWidth, setHeight, 
       ref={ref}
       className={styles.viewer}
       style={style}
+      onMouseDown={onMouseDown}
+      onMouseMove={onMouseMove}
+      onMouseUp={onMouseUp}
     >
+      {renderSelect()}
       {boxes.map((b, i) => renderBox(b, i))}
     </div>
   );

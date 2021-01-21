@@ -2,7 +2,10 @@
   background-repeat: no-repeat;
   background-position: center;
 
+  overflow: hidden;
   position: relative;
+
+  cursor: crosshair;
 }
 
 .box {
@@ -10,4 +13,13 @@
 
   background-color: #edeb66;
   opacity: 0.4;
+}
+
+.select {
+  position: absolute;
+
+  background-color: #ccccc6;
+  opacity: 0.4;
+  border-width: 2px;
+  border-style: dashed;
 }
