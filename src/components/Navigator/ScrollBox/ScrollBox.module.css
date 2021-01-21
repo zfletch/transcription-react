@@ -1,0 +1,15 @@
+.scrollbox {
+  position: absolute;
+
+  height: 100px;
+  width: 100px;
+
+  background-color: #edeb66;
+  opacity: 0.4;
+
+  cursor: grab;
+}
+
+.scrollbox:active {
+  cursor: grabbing;
+}
