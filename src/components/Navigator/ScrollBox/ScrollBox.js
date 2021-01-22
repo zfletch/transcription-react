@@ -17,13 +17,15 @@ const generateStyle = (x, y, zoom, width, height, localWidth, localHeight) => {
   // We can calculate `x` and `y` by finding the ratio between the width and
   // localWidth and multiplying `x` and `y` by that value.
 
+  if (!width) {
+    return {};
+  }
+
   return {
-    left: (x / zoom) * (localWidth / width),
-    top: (y / zoom) * (localWidth / width),
-    // height: `${(height / zoom) * (height / localHeight)}px`,
-    // width: `${(width / zoom) * (width / localWidth)}px`,
+    left: x * (localWidth / width),
+    top: y * (localWidth / width),
     width: `${100 / zoom}%`,
-    height: `${(height / width) * localWidth}px`,
+    height: `${((height / zoom) / width) * localWidth}px`,
   };
 };
 

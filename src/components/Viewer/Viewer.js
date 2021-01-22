@@ -11,9 +11,10 @@ const Viewer = ({ image, x, y, width, height, zoom, boxes, setWidth, setHeight, 
   const ref = useRef(null);
 
   useEffect(() => {
+    const element = ref.current;
     const resize = () => {
-      const height = ref.current.clientHeight;
-      const width = ref.current.clientWidth;
+      const height = element.clientHeight;
+      const width = element.clientWidth;
 
       setHeight(height);
       setWidth(width);
@@ -21,7 +22,11 @@ const Viewer = ({ image, x, y, width, height, zoom, boxes, setWidth, setHeight, 
     const observer = new ResizeObserver(resize);
 
     resize();
-    observer.observe(ref.current);
+    observer.observe(element);
+
+    return () => {
+      observer.unobserve(element);
+    };
   }, []);
 
   const renderBox = ({ x: boxX, y: boxY, width: boxWidth, height: boxHeight }, key) => {

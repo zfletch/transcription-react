@@ -10,9 +10,10 @@ const Navigator = ({ image, x, y, zoom, width, height, setX, setY }) => {
   const [localWidth, setLocalWidth] = useState(null);
 
   useEffect(() => {
+    const element = ref.current;
     const resize = () => {
-      const lh = ref.current.clientHeight;
-      const lw = ref.current.clientWidth;
+      const lh = element.clientHeight;
+      const lw = element.clientWidth;
 
       setLocalHeight(lh);
       setLocalWidth(lw);
@@ -20,7 +21,11 @@ const Navigator = ({ image, x, y, zoom, width, height, setX, setY }) => {
     const observer = new ResizeObserver(resize);
 
     resize();
-    observer.observe(ref.current);
+    observer.observe(element);
+
+    return () => {
+      observer.unobserve(element)
+    };
   }, []);
 
   return (
