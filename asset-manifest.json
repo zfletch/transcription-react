@@ -1,21 +1,21 @@
 {
   "files": {
-    "main.css": "/transcription-react/static/css/main.e7101201.chunk.css",
-    "main.js": "/transcription-react/static/js/main.0cdd37da.chunk.js",
-    "main.js.map": "/transcription-react/static/js/main.0cdd37da.chunk.js.map",
+    "main.css": "/transcription-react/static/css/main.33410647.chunk.css",
+    "main.js": "/transcription-react/static/js/main.77cb8753.chunk.js",
+    "main.js.map": "/transcription-react/static/js/main.77cb8753.chunk.js.map",
     "runtime-main.js": "/transcription-react/static/js/runtime-main.0a345deb.js",
     "runtime-main.js.map": "/transcription-react/static/js/runtime-main.0a345deb.js.map",
     "static/js/2.fcc3433b.chunk.js": "/transcription-react/static/js/2.fcc3433b.chunk.js",
     "static/js/2.fcc3433b.chunk.js.map": "/transcription-react/static/js/2.fcc3433b.chunk.js.map",
     "index.html": "/transcription-react/index.html",
-    "static/css/main.e7101201.chunk.css.map": "/transcription-react/static/css/main.e7101201.chunk.css.map",
+    "static/css/main.33410647.chunk.css.map": "/transcription-react/static/css/main.33410647.chunk.css.map",
     "static/js/2.fcc3433b.chunk.js.LICENSE.txt": "/transcription-react/static/js/2.fcc3433b.chunk.js.LICENSE.txt",
     "static/media/philostratus.d019d7fc.jpg": "/transcription-react/static/media/philostratus.d019d7fc.jpg"
   },
   "entrypoints": [
     "static/js/runtime-main.0a345deb.js",
     "static/js/2.fcc3433b.chunk.js",
-    "static/css/main.e7101201.chunk.css",
-    "static/js/main.0cdd37da.chunk.js"
+    "static/css/main.33410647.chunk.css",
+    "static/js/main.77cb8753.chunk.js"
   ]
 }
