@@ -11,11 +11,17 @@ const Viewer = ({ image, x, y, width, height, zoom, boxes, setWidth, setHeight, 
   const ref = useRef(null);
 
   useEffect(() => {
-    const height = ref.current.clientHeight;
-    const width = ref.current.clientWidth;
+    const resize = () => {
+      const height = ref.current.clientHeight;
+      const width = ref.current.clientWidth;
 
-    setHeight(height);
-    setWidth(width);
+      setHeight(height);
+      setWidth(width);
+    };
+    const observer = new ResizeObserver(resize);
+
+    resize();
+    observer.observe(ref.current);
   }, []);
 
   const renderBox = ({ x: boxX, y: boxY, width: boxWidth, height: boxHeight }, key) => {

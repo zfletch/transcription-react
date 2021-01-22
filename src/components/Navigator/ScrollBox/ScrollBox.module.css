@@ -3,8 +3,9 @@
 
   background-color: #ccccc6;
   opacity: 0.4;
-  border-width: 2px;
   border-style: dashed;
+  border-width: 2px;
+  box-sizing: border-box;
 
   cursor: grab;
 }

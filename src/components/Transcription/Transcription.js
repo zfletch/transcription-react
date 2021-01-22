@@ -7,7 +7,7 @@ const Transcription = ({ image, className, children }) => {
   const [y, setY] = useState(0);
   const [height, setHeight] = useState(null);
   const [width, setWidth] = useState(null);
-  const [zoom, setZoom] = useState(2);
+  const [zoom, setZoom] = useState(1);
   const [boxes, setBoxes] = useState([{ x: 100, y: 200, width: 100, height: 100 }]);
 
   return (
