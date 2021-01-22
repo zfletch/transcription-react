@@ -6,6 +6,10 @@ const max = (a, b) => (
   a > b ? a : b
 );
 
+const min = (a, b) => (
+  a < b ? a : b
+);
+
 const generateStyle = (x, y, zoom, width, height, localWidth, localHeight) => {
   // The way that CSS background images work is that the `width` is always
   // equivalent to 100% of the image (when `background-size` is `100%`) but the
@@ -24,7 +28,7 @@ const generateStyle = (x, y, zoom, width, height, localWidth, localHeight) => {
   return {
     left: x * (localWidth / width),
     top: y * (localWidth / width),
-    width: `${100 / zoom}%`,
+    width: `${localWidth / zoom}px`,
     height: `${((height / zoom) / width) * localWidth}px`,
   };
 };
@@ -35,9 +39,15 @@ const ScrollBox = ({ x, y, zoom, width, height, localWidth, localHeight, setX, s
   const [offsetY, setOffsetY] = useState(null);
 
   const onMouseMove = ({ screenX, screenY }) => {
-    if (drag && x >= 0 && y >= 0) {
-      setX(max(screenX - offsetX, 0));
-      setY(max(screenY - offsetY, 0));
+    if (drag) {
+      const boxWidth = localWidth / zoom;
+      const boxHeight = ((height / zoom) / width) * localWidth;
+
+      const newX = min(max(screenX - offsetX, 0), localWidth - boxWidth);
+      const newY = min(max(screenY - offsetY, 0), localHeight - boxHeight);
+
+      setX(newX);
+      setY(newY);
     }
   };
 
