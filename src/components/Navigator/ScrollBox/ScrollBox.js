@@ -43,11 +43,11 @@ const ScrollBox = ({ x, y, zoom, width, height, localWidth, localHeight, setX, s
       const boxWidth = localWidth / zoom;
       const boxHeight = ((height / zoom) / width) * localWidth;
 
-      const newX = min(max(screenX - offsetX, 0), localWidth - boxWidth);
-      const newY = min(max(screenY - offsetY, 0), localHeight - boxHeight);
+      const newX = min(max(screenX - offsetX, 0), (localWidth - boxWidth) * (width / localWidth));
+      const newY = min(max(screenY - offsetY, 0), (localHeight - boxHeight) * (width / localWidth));
 
-      setX(newX * (width / localWidth));
-      setY(newY * (width / localWidth));
+      setX(newX);
+      setY(newY);
     }
   };
 
