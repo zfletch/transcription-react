@@ -22,4 +22,5 @@
   opacity: 0.4;
   border-width: 2px;
   border-style: dashed;
+  box-sizing: border-box;
 }
