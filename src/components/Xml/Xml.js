@@ -2,6 +2,10 @@ import React from 'react';
 
 import styles from './Xml.module.css';
 
+const format = ({ x, y, width, height }) => (
+  [x, y, width, height].map(n => n.toFixed(4)).join(',')
+);
+
 const Xml = ({ boxes }) => {
   return (
     <div className={styles.xml}>
@@ -10,7 +14,7 @@ const Xml = ({ boxes }) => {
           <span className={styles.bracket}>&lt;w</span>
           {' '}
           <span className={styles.element}>
-            {`facs="urn:cite:perseus:miscellanyimgs.UWDkbqJfqQc@${x},${y},${width},${height}"`}
+            {`facs="urn:cite:perseus:miscellanyimgs.UWDkbqJfqQc@${format({ x, y, width, height })}"`}
           </span>
           <span className={styles.bracket}>&gt;</span>
           {text ? <br /> : false}
