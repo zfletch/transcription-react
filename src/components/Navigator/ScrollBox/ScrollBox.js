@@ -16,8 +16,8 @@ const generateStyle = (x, y, zoom, width, height, localWidth, localHeight) => {
   // height may be less.
   // To calculate what the size of the scrollbox should be, we can just use 100%
   // for the width (and adjust it based on zoom).
-  // For the height, we can figure out the percentage of the height makes up the
-  // width and multiply that by 100% (adjusted based on zoom).
+  // For the height, we can figure out the percentage of the height that make up
+  // the width and multiply that by 100% (adjusted based on zoom).
   // We can calculate `x` and `y` by finding the ratio between the width and
   // localWidth and multiplying `x` and `y` by that value.
 

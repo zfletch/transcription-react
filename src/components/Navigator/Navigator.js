@@ -4,7 +4,7 @@ import Scrollbox from './ScrollBox';
 
 import styles from './Navigator.module.css';
 
-const Navigator = ({ image, x, y, zoom, width, height, setX, setY }) => {
+const Navigator = ({ image, x, y, zoom, width, height, setX, setY, setRatio }) => {
   const ref = useRef(null);
   const [localHeight, setLocalHeight] = useState(null);
   const [localWidth, setLocalWidth] = useState(null);
@@ -17,6 +17,7 @@ const Navigator = ({ image, x, y, zoom, width, height, setX, setY }) => {
 
       setLocalHeight(lh);
       setLocalWidth(lw);
+      setRatio(lh / lw);
     };
     const observer = new ResizeObserver(resize);
 

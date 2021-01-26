@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 
 import styles from './Viewer.module.css';
 
-const Viewer = ({ image, x, y, width, height, zoom, boxes, setWidth, setHeight, setBoxes }) => {
+const Viewer = ({ image, x, y, width, height, zoom, boxes, ratio, setWidth, setHeight, setBoxes }) => {
   const [select, setSelect] = useState(false);
   const [selectX, setSelectX] = useState(null);
   const [selectY, setSelectY] = useState(null);
@@ -31,10 +31,10 @@ const Viewer = ({ image, x, y, width, height, zoom, boxes, setWidth, setHeight, 
 
   const renderBox = ({ x: boxX, y: boxY, width: boxWidth, height: boxHeight }, key) => {
     const style = {
-      top: `${boxY * width * zoom - y * zoom}px`,
+      top: `${boxY * ratio * width * zoom - y * zoom}px`,
       left: `${boxX * width * zoom - x * zoom}px`,
       width: `${boxWidth * width * zoom}px`,
-      height: `${boxHeight * width * zoom}px`,
+      height: `${boxHeight * ratio * width * zoom}px`,
     };
 
     return (
@@ -55,10 +55,10 @@ const Viewer = ({ image, x, y, width, height, zoom, boxes, setWidth, setHeight, 
     const selectLeft = selectWidth < 0 ? selectX + selectWidth : selectX;
 
     const newBoxes = boxes.concat({
-      y: (selectTop + y * zoom) / (width * zoom),
+      y: (selectTop + y * zoom) / (width * ratio * zoom),
       x: (selectLeft + x * zoom) / (width * zoom),
+      height: Math.abs(selectHeight) / (width * ratio *zoom),
       width: Math.abs(selectWidth) / (width * zoom),
-      height: Math.abs(selectHeight) / (width * zoom),
     });
 
     setBoxes(newBoxes);
