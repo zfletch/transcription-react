@@ -116,9 +116,6 @@ const Viewer = ({ image, x, y, width, height, zoom, boxes, ratio, setWidth, setH
 
   return (
     <div className={styles.container}>
-      <div className={styles.header}>
-        test
-      </div>
       <div
         ref={ref}
         className={styles.viewer}
