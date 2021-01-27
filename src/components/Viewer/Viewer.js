@@ -8,6 +8,8 @@ const Viewer = ({ image, x, y, width, height, zoom, boxes, ratio, setWidth, setH
   const [selectY, setSelectY] = useState(null);
   const [selectWidth, setSelectWidth] = useState(0);
   const [selectHeight, setSelectHeight] = useState(0);
+  const [offsetX, setOffsetX] = useState(0);
+  const [offsetY, setOffsetY] = useState(0);
   const ref = useRef(null);
 
   useEffect(() => {
@@ -18,6 +20,8 @@ const Viewer = ({ image, x, y, width, height, zoom, boxes, ratio, setWidth, setH
 
       setHeight(height);
       setWidth(width);
+      setOffsetX(element.offsetLeft);
+      setOffsetY(element.offsetTop);
     };
     const observer = new ResizeObserver(resize);
 
@@ -92,14 +96,14 @@ const Viewer = ({ image, x, y, width, height, zoom, boxes, ratio, setWidth, setH
 
   const onMouseMove = ({ clientX, clientY }) => {
     if (select) {
-      setSelectWidth(clientX - selectX - 10);
-      setSelectHeight(clientY - selectY - 10);
+      setSelectWidth(clientX - selectX - offsetX);
+      setSelectHeight(clientY - selectY - offsetY);
     }
   };
 
   const onMouseDown = ({ clientX, clientY }) => {
-    setSelectX(clientX - 10);
-    setSelectY(clientY - 10);
+    setSelectX(clientX - offsetX);
+    setSelectY(clientY - offsetY);
 
     setSelect(true);
   };
@@ -111,16 +115,21 @@ const Viewer = ({ image, x, y, width, height, zoom, boxes, ratio, setWidth, setH
   }
 
   return (
-    <div
-      ref={ref}
-      className={styles.viewer}
-      style={style}
-      onMouseDown={onMouseDown}
-      onMouseMove={onMouseMove}
-      onMouseUp={onMouseUp}
-    >
-      {renderSelect()}
-      {boxes.map((b, i) => renderBox(b, i))}
+    <div className={styles.container}>
+      <div className={styles.header}>
+        test
+      </div>
+      <div
+        ref={ref}
+        className={styles.viewer}
+        style={style}
+        onMouseDown={onMouseDown}
+        onMouseMove={onMouseMove}
+        onMouseUp={onMouseUp}
+      >
+        {renderSelect()}
+        {boxes.map((b, i) => renderBox(b, i))}
+      </div>
     </div>
   );
 };

@@ -6,7 +6,7 @@ import Editor from '../../Editor';
 
 const EditorWithContext = () => (
   <TranscriptionContext.Consumer>
-    {({ boxes, setBoxes }) => <Editor boxes={boxes} setBoxes={setBoxes} />}
+    {({ boxes, setBoxes, zoom, setZoom }) => <Editor boxes={boxes} setBoxes={setBoxes} zoom={zoom} setZoom={setZoom} />}
   </TranscriptionContext.Consumer>
 );
 

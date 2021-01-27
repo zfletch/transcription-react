@@ -38,26 +38,26 @@ const ScrollBox = ({ x, y, zoom, width, height, localWidth, localHeight, offsetL
   const [offsetX, setOffsetX] = useState(null);
   const [offsetY, setOffsetY] = useState(null);
 
-  const onMouseMove = ({ screenX, screenY }) => {
+  const onMouseMove = ({ clientX, clientY }) => {
     if (drag) {
       const boxWidth = localWidth / zoom;
       const boxHeight = ((height / zoom) / width) * localWidth;
 
       const speedX = ((offsetLeft * 2) + localWidth) / localWidth;
 
-      const newX = min(max(screenX * speedX - offsetX, 0), (localWidth - boxWidth) * (width / localWidth));
-      const newY = min(max(screenY * speedX - offsetY, 0), (localHeight - boxHeight) * (width / localWidth));
+      const newX = min(max(clientX * speedX - offsetX, 0), (localWidth - boxWidth) * (width / localWidth));
+      const newY = min(max(clientY * speedX - offsetY, 0), (localHeight - boxHeight) * (width / localWidth));
 
       setX(newX);
       setY(newY);
     }
   };
 
-  const onMouseDown = ({ screenX, screenY }) => {
+  const onMouseDown = ({ clientX, clientY }) => {
     const speedX = ((offsetLeft * 2) + localWidth) / localWidth;
 
-    setOffsetX(screenX * speedX - x);
-    setOffsetY(screenY * speedX - y);
+    setOffsetX(clientX * speedX - x);
+    setOffsetY(clientY * speedX - y);
 
     setDrag(true);
   };

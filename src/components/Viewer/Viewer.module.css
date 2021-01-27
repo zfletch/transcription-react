@@ -1,3 +1,17 @@
+.container {
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  background-color: rgb(242, 242, 242);
+  padding: 0.2rem;
+  margin-top: 0.1rem;
+  margin-bottom: 0.1rem;
+
+  text-align: right;
+}
+
 .viewer {
   background-repeat: no-repeat;
   background-position: center;
@@ -6,6 +20,8 @@
   position: relative;
 
   cursor: crosshair;
+
+  flex: 1;
 }
 
 .box {
