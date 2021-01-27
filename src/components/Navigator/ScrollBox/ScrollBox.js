@@ -10,7 +10,7 @@ const min = (a, b) => (
   a < b ? a : b
 );
 
-const generateStyle = (x, y, zoom, width, height, localWidth, localHeight) => {
+const generateStyle = (x, y, zoom, width, height, localWidth, localHeight, offsetLeft, offsetTop) => {
   // The way that CSS background images work is that the `width` is always
   // equivalent to 100% of the image (when `background-size` is `100%`) but the
   // height may be less.
@@ -26,14 +26,14 @@ const generateStyle = (x, y, zoom, width, height, localWidth, localHeight) => {
   }
 
   return {
-    left: x * (localWidth / width),
-    top: y * (localWidth / width),
+    left: x * (localWidth / width) + offsetLeft,
+    top: y * (localWidth / width) + offsetTop,
     width: `${localWidth / zoom}px`,
     height: `${((height / zoom) / width) * localWidth}px`,
   };
 };
 
-const ScrollBox = ({ x, y, zoom, width, height, localWidth, localHeight, setX, setY }) => {
+const ScrollBox = ({ x, y, zoom, width, height, localWidth, localHeight, offsetLeft, offsetTop, setX, setY }) => {
   const [drag, setDrag] = useState(false);
   const [offsetX, setOffsetX] = useState(null);
   const [offsetY, setOffsetY] = useState(null);
@@ -64,16 +64,35 @@ const ScrollBox = ({ x, y, zoom, width, height, localWidth, localHeight, setX, s
     window.addEventListener('mouseup', onMouseUp);
 
     return () => {
-      window.removeEventListener('mousemove', onMouseUp)
+      window.removeEventListener('mouseup', onMouseUp)
     }
   }, [])
 
+  useEffect(() => {
+    window.addEventListener('mousemove', onMouseMove);
+
+    return () => {
+      window.removeEventListener('mousemove', onMouseMove)
+    }
+  }, [drag])
+
+  // TODO
+  const boxWidth = localWidth / zoom;
+  const boxHeight = ((height / zoom) / width) * localWidth;
+
+  const newX = min(max(x, 0), (localWidth - boxWidth) * (width / localWidth));
+  const newY = min(max(y, 0), (localHeight - boxHeight) * (width / localWidth));
+
+  if (newX !== x || newY !== y) {
+    setX(newX);
+    setY(newY);
+  }
+
   return (
     <div
-      style={generateStyle(x, y, zoom, width, height, localWidth, localWidth)}
+      style={generateStyle(x, y, zoom, width, height, localWidth, localWidth, offsetLeft, offsetTop)}
       className={styles.scrollbox}
       onMouseDown={onMouseDown}
-      onMouseMove={onMouseMove}
     />
   );
 };
