@@ -76,17 +76,18 @@ const ScrollBox = ({ x, y, zoom, width, height, localWidth, localHeight, offsetL
     }
   }, [drag])
 
-  // TODO
-  const boxWidth = localWidth / zoom;
-  const boxHeight = ((height / zoom) / width) * localWidth;
+  useEffect(() => {
+    const boxWidth = localWidth / zoom;
+    const boxHeight = ((height / zoom) / width) * localWidth;
 
-  const newX = min(max(x, 0), (localWidth - boxWidth) * (width / localWidth));
-  const newY = min(max(y, 0), (localHeight - boxHeight) * (width / localWidth));
+    const newX = min(max(x, 0), (localWidth - boxWidth) * (width / localWidth));
+    const newY = min(max(y, 0), (localHeight - boxHeight) * (width / localWidth));
 
-  if (newX !== x || newY !== y) {
-    setX(newX);
-    setY(newY);
-  }
+    if (newX !== x || newY !== y) {
+      setX(newX);
+      setY(newY);
+    }
+  }, [localHeight, localWidth, offsetLeft, offsetTop])
 
   return (
     <div
