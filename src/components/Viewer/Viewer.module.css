@@ -27,8 +27,20 @@
 .box {
   position: absolute;
 
+  background-color: #59580b;
+  opacity: 0.2;
+
+  border-color: rgba(0, 0, 0, 1);
+  border-style: dotted;
+  border-width: 2px;
+  box-sizing: border-box;
+}
+
+.active {
   background-color: #edeb66;
   opacity: 0.4;
+
+  border-color: rgba(0, 0, 0, 0.5);
 }
 
 .select {

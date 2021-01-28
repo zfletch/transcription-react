@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 
 import styles from './Viewer.module.css';
 
-const Viewer = ({ image, x, y, width, height, zoom, boxes, ratio, setWidth, setHeight, setBoxes }) => {
+const Viewer = ({ image, x, y, width, height, zoom, boxes, ratio, setWidth, setHeight, setBoxes, activeBox, setActiveBox }) => {
   const [select, setSelect] = useState(false);
   const [selectX, setSelectX] = useState(null);
   const [selectY, setSelectY] = useState(null);
@@ -33,18 +33,19 @@ const Viewer = ({ image, x, y, width, height, zoom, boxes, ratio, setWidth, setH
     };
   }, []);
 
-  const renderBox = ({ x: boxX, y: boxY, width: boxWidth, height: boxHeight }, key) => {
+  const renderBox = ({ x: boxX, y: boxY, width: boxWidth, height: boxHeight }, index) => {
     const style = {
       top: `${boxY * ratio * width * zoom - y * zoom}px`,
       left: `${boxX * width * zoom - x * zoom}px`,
       width: `${boxWidth * width * zoom}px`,
       height: `${boxHeight * ratio * width * zoom}px`,
     };
+    const classes = index === activeBox ? [styles.box, styles.active] : [styles.box];
 
     return (
       <div
-        key={key}
-        className={styles.box}
+        key={index}
+        className={classes.join(' ')}
         style={style}
       />
     );
@@ -69,6 +70,7 @@ const Viewer = ({ image, x, y, width, height, zoom, boxes, ratio, setWidth, setH
     setSelect(false);
     setSelectWidth(null);
     setSelectHeight(null);
+    setActiveBox(newBoxes.length - 1);
   };
 
   const renderSelect = () => {
