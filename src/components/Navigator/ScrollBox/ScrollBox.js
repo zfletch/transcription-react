@@ -28,8 +28,8 @@ const generateStyle = (x, y, zoom, width, height, localWidth, localHeight, offse
   return {
     left: x * (localWidth / width) + offsetLeft,
     top: y * (localWidth / width) + offsetTop,
-    width: `${localWidth / zoom}px`,
-    height: `${((height / zoom) / width) * localWidth}px`,
+    width: `${min(localWidth / zoom, localWidth)}px`,
+    height: `${min(((height / zoom) / width) * localWidth, localHeight)}px`,
   };
 };
 
@@ -45,8 +45,8 @@ const ScrollBox = ({ x, y, zoom, width, height, localWidth, localHeight, offsetL
 
       const speedX = ((offsetLeft * 2) + localWidth) / localWidth;
 
-      const newX = min(max(clientX * speedX - offsetX, 0), (localWidth - boxWidth) * (width / localWidth));
-      const newY = min(max(clientY * speedX - offsetY, 0), (localHeight - boxHeight) * (width / localWidth));
+      const newX = min(max(clientX * speedX - offsetX, 0), max((localWidth - boxWidth) * (width / localWidth), 0));
+      const newY = min(max(clientY * speedX - offsetY, 0), max((localHeight - boxHeight) * (width / localWidth), 0));
 
       setX(newX);
       setY(newY);
@@ -84,18 +84,18 @@ const ScrollBox = ({ x, y, zoom, width, height, localWidth, localHeight, offsetL
     const boxWidth = localWidth / zoom;
     const boxHeight = ((height / zoom) / width) * localWidth;
 
-    const newX = min(max(x, 0), (localWidth - boxWidth) * (width / localWidth));
-    const newY = min(max(y, 0), (localHeight - boxHeight) * (width / localWidth));
+    const newX = min(max(x, 0), max((localWidth - boxWidth) * (width / localWidth), 0));
+    const newY = min(max(y, 0), max((localHeight - boxHeight) * (width / localWidth), 0));
 
     if (newX !== x || newY !== y) {
       setX(newX);
       setY(newY);
     }
-  }, [localHeight, localWidth, offsetLeft, offsetTop])
+  }, [localHeight, localWidth, offsetLeft, offsetTop, zoom])
 
   return (
     <div
-      style={generateStyle(x, y, zoom, width, height, localWidth, localWidth, offsetLeft, offsetTop)}
+      style={generateStyle(x, y, zoom, width, height, localWidth, localHeight, offsetLeft, offsetTop)}
       className={styles.scrollbox}
       onMouseDown={onMouseDown}
     />
