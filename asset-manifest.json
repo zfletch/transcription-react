@@ -1,21 +1,21 @@
 {
   "files": {
-    "main.css": "/transcription-react/static/css/main.fa5784a2.chunk.css",
-    "main.js": "/transcription-react/static/js/main.0caca58a.chunk.js",
-    "main.js.map": "/transcription-react/static/js/main.0caca58a.chunk.js.map",
+    "main.css": "/transcription-react/static/css/main.4866a029.chunk.css",
+    "main.js": "/transcription-react/static/js/main.b1fd156a.chunk.js",
+    "main.js.map": "/transcription-react/static/js/main.b1fd156a.chunk.js.map",
     "runtime-main.js": "/transcription-react/static/js/runtime-main.0a345deb.js",
     "runtime-main.js.map": "/transcription-react/static/js/runtime-main.0a345deb.js.map",
-    "static/js/2.25e9cda9.chunk.js": "/transcription-react/static/js/2.25e9cda9.chunk.js",
-    "static/js/2.25e9cda9.chunk.js.map": "/transcription-react/static/js/2.25e9cda9.chunk.js.map",
+    "static/js/2.8b7ba3a3.chunk.js": "/transcription-react/static/js/2.8b7ba3a3.chunk.js",
+    "static/js/2.8b7ba3a3.chunk.js.map": "/transcription-react/static/js/2.8b7ba3a3.chunk.js.map",
     "index.html": "/transcription-react/index.html",
-    "static/css/main.fa5784a2.chunk.css.map": "/transcription-react/static/css/main.fa5784a2.chunk.css.map",
-    "static/js/2.25e9cda9.chunk.js.LICENSE.txt": "/transcription-react/static/js/2.25e9cda9.chunk.js.LICENSE.txt",
+    "static/css/main.4866a029.chunk.css.map": "/transcription-react/static/css/main.4866a029.chunk.css.map",
+    "static/js/2.8b7ba3a3.chunk.js.LICENSE.txt": "/transcription-react/static/js/2.8b7ba3a3.chunk.js.LICENSE.txt",
     "static/media/philostratus.d019d7fc.jpg": "/transcription-react/static/media/philostratus.d019d7fc.jpg"
   },
   "entrypoints": [
     "static/js/runtime-main.0a345deb.js",
-    "static/js/2.25e9cda9.chunk.js",
-    "static/css/main.fa5784a2.chunk.css",
-    "static/js/main.0caca58a.chunk.js"
+    "static/js/2.8b7ba3a3.chunk.js",
+    "static/css/main.4866a029.chunk.css",
+    "static/js/main.b1fd156a.chunk.js"
   ]
 }
