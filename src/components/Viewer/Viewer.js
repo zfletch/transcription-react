@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { MousePointer, Maximize } from 'react-feather';
 
 import styles from './Viewer.module.css';
 
@@ -10,6 +11,7 @@ const Viewer = ({ image, x, y, width, height, zoom, boxes, ratio, setWidth, setH
   const [selectHeight, setSelectHeight] = useState(0);
   const [offsetX, setOffsetX] = useState(0);
   const [offsetY, setOffsetY] = useState(0);
+  const [mode, setMode] = useState('draw'); // draw, select
   const ref = useRef(null);
 
   useEffect(() => {
@@ -40,12 +42,19 @@ const Viewer = ({ image, x, y, width, height, zoom, boxes, ratio, setWidth, setH
       width: `${boxWidth * width * zoom}px`,
       height: `${boxHeight * ratio * width * zoom}px`,
     };
-    const classes = index === activeBox ? [styles.box, styles.active] : [styles.box];
+    const classes = [styles.box];
+    if (index === activeBox) {
+      classes.push(styles.active);
+    }
+    if (mode === 'select' && index !== activeBox) {
+      classes.push(styles.selectBox);
+    }
 
     return (
       <div
         key={index}
         className={classes.join(' ')}
+        onMouseDown={mode === 'select' ? () => { setActiveBox(index) }: null}
         style={style}
       />
     );
@@ -118,13 +127,22 @@ const Viewer = ({ image, x, y, width, height, zoom, boxes, ratio, setWidth, setH
 
   return (
     <div className={styles.container}>
+      <div className={styles.header}>
+        <div className={mode === 'select' ? styles.activeSelector : styles.selector} onMouseDown={mode === 'select' ? null : () => setMode('select')}>
+          <MousePointer className={styles.icon} />
+        </div>
+
+        <div className={mode === 'draw' ? styles.activeSelector : styles.selector} onMouseDown={mode === 'draw' ? null : () => setMode('draw')}>
+          <Maximize className={styles.icon} />
+        </div>
+      </div>
       <div
         ref={ref}
-        className={styles.viewer}
+        className={mode === 'draw' ? [styles.viewer, styles.draw].join(' ') : styles.viewer}
         style={style}
-        onMouseDown={onMouseDown}
-        onMouseMove={onMouseMove}
-        onMouseUp={onMouseUp}
+        onMouseDown={mode === 'draw' ? onMouseDown : null}
+        onMouseMove={mode === 'draw' ? onMouseMove : null}
+        onMouseUp={mode === 'draw' ? onMouseUp : null}
       >
         {renderSelect()}
         {boxes.map((b, i) => renderBox(b, i))}

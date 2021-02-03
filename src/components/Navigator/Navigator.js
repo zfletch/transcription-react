@@ -1,10 +1,11 @@
 import React, { useRef, useEffect, useState } from 'react';
+import { ZoomIn, ZoomOut } from 'react-feather';
 
 import Scrollbox from './ScrollBox';
 
 import styles from './Navigator.module.css';
 
-const Navigator = ({ image, x, y, zoom, width, height, setX, setY, setRatio }) => {
+const Navigator = ({ image, x, y, zoom, width, height, setX, setY, setRatio, setZoom }) => {
   const navigatorRef = useRef(null);
   const imageRef = useRef(null);
   const [localHeight, setLocalHeight] = useState(null);
@@ -42,7 +43,16 @@ const Navigator = ({ image, x, y, zoom, width, height, setX, setY, setRatio }) =
   }, []);
 
   return (
-    <div>
+    <div className={styles.container}>
+      <div className={styles.header}>
+        <div className={zoom >= 3.99 ? styles.disabledSelector : styles.selector} onMouseDown={zoom >= 3.99 ? null : () => setZoom(zoom + 0.2)}>
+          <ZoomIn className={styles.icon} />
+        </div>
+
+        <div className={zoom <= 1.01 ? styles.disabledSelector : styles.selector} onMouseDown={zoom <= 1.01 ? null : () => setZoom(zoom - 0.2)}>
+          <ZoomOut className={styles.icon} />
+        </div>
+      </div>
       <div className={styles.navigator} ref={navigatorRef}>
         <img src={image} ref={imageRef} className={styles.image} />
         <Scrollbox x={x} y={y} zoom={zoom} width={width} height={height} localHeight={localHeight} localWidth={localWidth} setX={setX} setY={setY} offsetLeft={offsetLeft} offsetTop={offsetTop} />

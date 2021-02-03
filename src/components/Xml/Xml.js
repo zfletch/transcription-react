@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import styles from './Xml.module.css';
 
@@ -30,6 +30,7 @@ import styles from './Xml.module.css';
 
 import AceEditor from 'react-ace';
 import { parseString } from 'xml2js';
+import { Edit, MousePointer, Save } from 'react-feather';
 
 import 'ace-builds/src-noconflict/mode-xml';
 import 'ace-builds/src-noconflict/theme-chrome';
@@ -61,6 +62,7 @@ const extractJson = (key, children, boxes) => {
 };
 
 const Xml = ({ xml, setBoxes }) => {
+  const [mode, setMode] = useState('select') // select, edit, save
 
   useEffect(() => {
     const json = xmlToJson(xml)
@@ -76,16 +78,32 @@ const Xml = ({ xml, setBoxes }) => {
   }, [xml]);
 
   return (
-    <AceEditor
-      mode="xml"
-      theme="chrome"
-      tabSize="2"
-      height="auto"
-      width="auto"
-      showPrintMargin={false}
-      editorProps={{ $blockScrolling: true }}
-      value={xml}
-    />
+    <div className={styles.container}>
+      <div className={styles.header}>
+        <div className={mode === 'select' ? styles.activeSelector : styles.selector} onMouseDown={mode === 'select' ? null : () => setMode('select')}>
+          <MousePointer className={styles.icon} />
+        </div>
+
+        <div className={mode === 'edit' ? styles.activeSelector : styles.selector} onMouseDown={mode === 'edit' ? null : () => setMode('edit')}>
+          <Edit className={styles.icon} />
+        </div>
+
+        <div className={mode === 'save' ? styles.activeSelector : styles.selector} onMouseDown={mode === 'save' ? null :  () => setMode('save')}>
+          <Save className={styles.icon} />
+        </div>
+      </div>
+      <AceEditor
+        className={styles.editor}
+        mode="xml"
+        theme="chrome"
+        tabSize={2}
+        height="auto"
+        width="auto"
+        showPrintMargin={false}
+        editorProps={{ $blockScrolling: true }}
+        value={xml}
+      />
+    </div>
   );
 };
 
