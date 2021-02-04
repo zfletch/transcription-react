@@ -8,7 +8,7 @@ import Xml from '../Transcription/Xml';
 
 import styles from './App.module.css';
 
-import philostratus from './philostratus.jpg';
+import philostratus from './latin.jpg';
 
 const exampleXml = `
 <TEI xmlns="http://www.tei-c.org/ns/1.0" xml:lang="en">

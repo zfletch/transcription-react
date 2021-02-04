@@ -2,7 +2,7 @@ import React from 'react';
 
 import styles from './Editor.module.css';
 
-const Editor = ({ boxes, zoom, setBoxes, setZoom, activeBox, setActiveBox }) => {
+const Editor = ({ boxes, setBoxes, activeBox, setActiveBox }) => {
   const selectedBox = activeBox === null ? null : boxes[activeBox];
 
   const updateField = (field, { target: { value }}, transform) => {
@@ -19,10 +19,6 @@ const Editor = ({ boxes, zoom, setBoxes, setZoom, activeBox, setActiveBox }) => 
     setBoxes(newBoxes);
   };
 
-  const updateZoom = ({ target: { value }}) => {
-    setZoom(value);
-  };
-
   const deleteBox = () => {
     const newBoxes = boxes.filter((b, ii) => ii === activeBox ? false : true);
 
@@ -33,14 +29,23 @@ const Editor = ({ boxes, zoom, setBoxes, setZoom, activeBox, setActiveBox }) => 
   if (!selectedBox) {
     return (
       <div className={styles.editor}>
-        Zoom ({zoom}):
-        <input type="range" min="1" max="5" onChange={updateZoom} value={zoom} />
+        Select box:
+        <select value={activeBox === null ? '' : activeBox} onChange={({ target: { value }}) => setActiveBox(value === '' ? null : parseInt(value))}>
+          <option value="">-</option>
+          {boxes.map((box, ii) => <option key={ii} value={ii}>{ii + 1}{boxes[ii].text !== undefined ? ` - ${boxes[ii].text}` : ''}</option>)}
+        </select>
       </div>
     );
   }
 
   return (
     <div className={styles.editor}>
+      Select box:
+      <select value={activeBox === null ? '' : activeBox} onChange={({ target: { value }}) => setActiveBox(value === '' ? null : parseInt(value))}>
+        <option value="">-</option>
+        {boxes.map((box, ii) => <option key={ii} value={ii}>{ii + 1}{boxes[ii].text !== undefined ? ` - ${boxes[ii].text}` : ''}</option>)}
+      </select>
+      <br />
       Text:
       <input type="text" onChange={(e) => updateField('text', e)} value={selectedBox.text || ''} />
       <br />
@@ -59,8 +64,6 @@ const Editor = ({ boxes, zoom, setBoxes, setZoom, activeBox, setActiveBox }) => 
       Delete:
       <input type="button" onClick={deleteBox} value="Delete" />
       <br />
-      Zoom ({zoom}):
-      <input type="range" min="1" max="5" onChange={updateZoom} value={zoom} />
     </div>
   );
 };

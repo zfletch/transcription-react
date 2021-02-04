@@ -45,7 +45,7 @@ const Navigator = ({ image, x, y, zoom, width, height, setX, setY, setRatio, set
   return (
     <div className={styles.container}>
       <div className={styles.header}>
-        <div className={zoom >= 3.99 ? styles.disabledSelector : styles.selector} onMouseDown={zoom >= 3.99 ? null : () => setZoom(zoom + 0.2)}>
+        <div className={zoom >= 9.99 ? styles.disabledSelector : styles.selector} onMouseDown={zoom >= 9.99 ? null : () => setZoom(zoom + 0.2)}>
           <ZoomIn className={styles.icon} />
         </div>
 
