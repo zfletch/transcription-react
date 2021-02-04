@@ -1,3 +1,17 @@
 .editor {
-  padding: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.imageWrapper {
+  display: flex;
+
+  flex: 1;
+}
+
+.image {
+  background-repeat: no-repeat;
+  overflow: hidden;
+
+  flex: 1;
 }

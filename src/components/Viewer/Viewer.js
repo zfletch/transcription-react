@@ -71,7 +71,7 @@ const Viewer = ({ image, x, y, width, height, zoom, boxes, ratio, setWidth, setH
     const newBoxes = boxes.concat({
       y: (selectTop + y * zoom) / (width * ratio * zoom),
       x: (selectLeft + x * zoom) / (width * zoom),
-      height: Math.abs(selectHeight) / (width * ratio *zoom),
+      height: Math.abs(selectHeight) / (width * ratio * zoom),
       width: Math.abs(selectWidth) / (width * zoom),
     });
 
