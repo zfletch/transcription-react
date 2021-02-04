@@ -5,6 +5,8 @@
 
 .imageWrapper {
   display: flex;
+  justify-content: center;
+  align-items: center;
 
   flex: 1;
 }
@@ -12,6 +14,7 @@
 .image {
   background-repeat: no-repeat;
   overflow: hidden;
+  height: 100%;
 
   flex: 1;
 }
