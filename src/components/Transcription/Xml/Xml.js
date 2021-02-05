@@ -6,7 +6,7 @@ import Xml from '../../Xml';
 
 const XmlWithContext = () => (
   <TranscriptionContext.Consumer>
-    {({ boxes, setBoxes, activeBox, setActiveBox, xml }) => <Xml boxes={boxes} setBoxes={setBoxes} activeBox={activeBox} setActiveBox={setActiveBox} xml={xml} />}
+    {({ boxes, setBoxes, activeBox, setActiveBox, xml, setXml }) => <Xml boxes={boxes} setBoxes={setBoxes} activeBox={activeBox} setActiveBox={setActiveBox} xml={xml} setXml={setXml} />}
   </TranscriptionContext.Consumer>
 );
 

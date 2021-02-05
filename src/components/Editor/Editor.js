@@ -60,7 +60,7 @@ const Editor = ({ image, x, y, width, height, boxes, setBoxes, activeBox, setAct
   let maxWidth;
   let style;
 
-  if (selectedBox !== null) {
+  if (selectedBox !== null && selectedBox !== undefined) {
     zoomAmount = min(containerWidth / (selectedBox.width * naturalWidth), containerHeight / (selectedBox.height * naturalHeight));
     maxHeight = containerWidth * selectedBox.height * naturalHeight / (selectedBox.width * naturalWidth);
     maxWidth = containerHeight * selectedBox.width * naturalWidth / (selectedBox.height * naturalHeight);

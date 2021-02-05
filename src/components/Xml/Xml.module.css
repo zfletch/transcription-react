@@ -4,8 +4,20 @@
   white-space: nowrap;
   text-align: left;
 
-  padding: 20px;
+  padding: 1rem;
 
+  flex: 1;
+}
+
+.xmlContainer {
+  flex: 1;
+
+  overflow: auto;
+
+  display: flex;
+}
+
+.line {
   cursor: pointer;
 }
 
@@ -18,25 +30,31 @@
 }
 
 .bracket {
-  color: rgb(0, 0, 255);
+  color: #930f80;
 }
 
 .element {
-  color: rgb(128, 0, 128);
+  color: #000000;
 }
 
 .attribute {
-  color: rgb(0, 0, 0);
+  color: #994409;
+}
+
+.equals {
+  color: #687687;
 }
 
 .attributeText {
-  color: rgb(255, 0, 0);
+  color: #1a1aa6;
 }
 
 
 .container {
   display: flex;
   flex-direction: column;
+
+  overflow: auto;
 }
 
 .header {
@@ -76,6 +94,12 @@
 
 .activeSelector {
   background-color: #c4c4c4;
+  padding-left: 0.1rem;
+  padding-right: 0.1rem;
+}
+
+.disabledSelector {
+  color: #ababab;
   padding-left: 0.1rem;
   padding-right: 0.1rem;
 }

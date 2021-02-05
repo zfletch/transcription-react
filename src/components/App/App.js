@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import Editor from '../Transcription/Editor';
 import Navigator from '../Transcription/Navigator';
@@ -10,8 +10,7 @@ import styles from './App.module.css';
 
 import philostratus from './latin.jpg';
 
-const exampleXml = `
-<TEI xmlns="http://www.tei-c.org/ns/1.0" xml:lang="en">
+const exampleXml = `<TEI xmlns="http://www.tei-c.org/ns/1.0" xml:lang="en">
   <teiHeader>
       <fileDesc>
          <titleStmt>
@@ -73,13 +72,17 @@ const exampleXml = `
 </TEI>
 `;
 
-const App = () => (
-  <Transcription className={styles.transcription} image={philostratus} xml={exampleXml}>
-    <Viewer />
-    <Editor />
-    <Navigator />
-    <Xml />
-  </Transcription>
-);
+const App = () => {
+  const [xml, setXml] = useState(exampleXml)
+
+  return (
+    <Transcription className={styles.transcription} image={philostratus} xml={xml} setXml={setXml}>
+      <Viewer />
+      <Editor />
+      <Navigator />
+      <Xml />
+    </Transcription>
+  );
+};
 
 export default App;

@@ -1,39 +1,45 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 
 import styles from './Xml.module.css';
 
-// const format = ({ x, y, width, height }) => (
-//   [x, y, width, height].map(n => n.toFixed(4)).join(',')
-// );
-//
-// const Xml = ({ boxes, activeBox, setActiveBox }) => {
-//   return (
-//     <div className={styles.xml}>
-//       {boxes.map(({ x, y, width, height, text }, ii) => (
-//         <div key={ii} className={ii === activeBox ? [styles.active, styles.line].join(' ') : styles.line} onClick={() => setActiveBox(ii)}>
-//           <span className={styles.bracket}>&lt;w</span>
-//           {' '}
-//           <span className={styles.element}>
-//             {`facs="urn:cite:perseus:miscellanyimgs.UWDkbqJfqQc@${format({ x, y, width, height })}"`}
-//           </span>
-//           <span className={styles.bracket}>&gt;</span>
-//           {text ? <br /> : false}
-//           {text ? <>&nbsp;&nbsp;</> : false}
-//           {text}
-//           {text ? <br /> : false}
-//           <span className={styles.bracket}>&lt;/w&gt;</span>
-//         </div>
-//       ))}
-//     </div>
-//   );
-// };
-
 import AceEditor from 'react-ace';
 import { parseString } from 'xml2js';
-import { Edit, MousePointer, Save } from 'react-feather';
+import { Edit, MousePointer, X, Check } from 'react-feather';
 
 import 'ace-builds/src-noconflict/mode-xml';
 import 'ace-builds/src-noconflict/theme-chrome';
+import 'ace-builds/webpack-resolver';
+
+const format = ({ x, y, width, height }) => (
+  [x, y, width, height].map(n => n.toFixed(4)).join(',')
+);
+
+const renderPlainXml = ({ boxes, activeBox, setActiveBox }) => {
+  return (
+    <div className={styles.xmlContainer}>
+      <div className={styles.xml}>
+        {boxes.map(({ x, y, width, height, text }, ii) => (
+          <div key={ii} className={ii === activeBox ? [styles.active, styles.line].join(' ') : styles.line} onClick={() => setActiveBox(ii)}>
+            <span className={styles.bracket}>&lt;w</span>
+            {' '}
+            <span className={styles.element}>
+              <span className={styles.attribute}>facs</span><span className={styles.equals}>=</span>
+              <span className={styles.attributeText}>
+                {`"urn:cite:perseus:miscellanyimgs.UWDkbqJfqQc@${format({ x, y, width, height })}"`}
+              </span>
+            </span>
+            <span className={styles.bracket}>&gt;</span>
+            {text ? <br /> : false}
+            {text ? <>&nbsp;&nbsp;</> : false}
+            {text}
+            {text ? <br /> : false}
+            <span className={styles.bracket}>&lt;/w&gt;</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+};
 
 const xmlToJson = (xml) => {
   let json;
@@ -61,8 +67,9 @@ const extractJson = (key, children, boxes) => {
   });
 };
 
-const Xml = ({ xml, setBoxes }) => {
-  const [mode, setMode] = useState('select') // select, edit, save
+const Xml = ({ xml, setXml, boxes, setBoxes, activeBox, setActiveBox }) => {
+  const [mode, setMode] = useState('select') // select, edit
+  const aceRef = useRef(null);
 
   useEffect(() => {
     const json = xmlToJson(xml)
@@ -80,7 +87,7 @@ const Xml = ({ xml, setBoxes }) => {
   return (
     <div className={styles.container}>
       <div className={styles.header}>
-        <div className={mode === 'select' ? styles.activeSelector : styles.selector} onMouseDown={mode === 'select' ? null : () => setMode('select')}>
+        <div className={mode === 'select' ? styles.activeSelector : styles.disabledSelector}>
           <MousePointer className={styles.icon} />
         </div>
 
@@ -88,21 +95,29 @@ const Xml = ({ xml, setBoxes }) => {
           <Edit className={styles.icon} />
         </div>
 
-        <div className={mode === 'save' ? styles.activeSelector : styles.selector} onMouseDown={mode === 'save' ? null :  () => setMode('save')}>
-          <Save className={styles.icon} />
+        <div className={mode === 'edit' ? styles.selector : styles.disabledSelector} onMouseDown={mode === 'edit' ? () => { setXml(aceRef.current.editor.getValue()); setMode('select') } : null}>
+          <Check className={styles.icon} />
+        </div>
+
+        <div className={mode === 'edit' ? styles.selector : styles.disabledSelector} onMouseDown={mode === 'edit' ? () => setMode('select') : null}>
+          <X className={styles.icon} />
         </div>
       </div>
-      <AceEditor
-        className={styles.editor}
-        mode="xml"
-        theme="chrome"
-        tabSize={2}
-        height="auto"
-        width="auto"
-        showPrintMargin={false}
-        editorProps={{ $blockScrolling: true }}
-        value={xml}
-      />
+      {(mode === 'edit') && (
+        <AceEditor
+          ref={aceRef}
+          className={styles.editor}
+          mode="xml"
+          theme="chrome"
+          tabSize={2}
+          height="auto"
+          width="auto"
+          showPrintMargin={false}
+          editorProps={{ $blockScrolling: true }}
+          value={xml}
+        />
+      )}
+      {(mode === 'select') && renderPlainXml({ boxes, activeBox, setActiveBox })}
     </div>
   );
 };
