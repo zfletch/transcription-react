@@ -56,7 +56,7 @@ const extractJson = (key, children, boxes) => {
       const nums = node.$.facs.split('@')[1];
       const [x, y, width, height] = nums.split(',').map(parseFloat);
 
-      boxes.push({ x, y, width, height });
+      boxes.push({ x, y, width, height, text: node._ });
     }
 
     if (node.$$) {
