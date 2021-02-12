@@ -83,7 +83,7 @@ const Editor = ({ image, x, y, width, height, boxes, setBoxes, activeBox, setAct
           {boxes.map((box, ii) => <option key={ii} value={ii}>{ii + 1}{boxes[ii].text !== undefined ? ` - ${boxes[ii].text}` : ''}</option>)}
         </select>
         <br />
-        {(selectedBox !== null) && (
+        {(selectedBox !== null && selectedBox !== undefined) && (
           <>
             Text:
             <input type="text" onChange={(e) => updateField('text', e)} value={selectedBox.text || ''} />
