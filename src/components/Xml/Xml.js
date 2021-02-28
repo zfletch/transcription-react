@@ -27,7 +27,7 @@ const renderPlainXml = ({ urn, boxes, activeBox, setActiveBox }) => {
             <span className={styles.bracket}>&gt;</span>
             {text ? <br /> : false}
             {text ? <>&nbsp;&nbsp;</> : false}
-            {text}
+            {text ? <span className={styles.text}>{text}</span> : false}
             {text ? <br /> : false}
             <span className={styles.bracket}>&lt;/w&gt;</span>
           </div>
@@ -99,7 +99,7 @@ const Xml = ({ urn, xml, setXml, boxes, setBoxes, activeBox, setActiveBox }) => 
           <Clipboard className={styles.icon} />
         </div>
       </div>
-      {renderPlainXml({ urn, boxes, activeBox, setActiveBox })}}
+      {renderPlainXml({ urn, boxes, activeBox, setActiveBox })}
     </div>
   );
 };

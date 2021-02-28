@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 
 import TranscriptionContext from './transcription-context';
 
+import './Transcription.css';
+
 const Transcription = ({ image, urn, xml, setXml, className, children }) => {
   const [x, setX] = useState(0);
   const [y, setY] = useState(0);

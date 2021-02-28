@@ -2,6 +2,10 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './components/App';
 
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'perseids-react-components/build/css/index.css';
+import './index.css';
+
 ReactDOM.render(
   <React.StrictMode>
     <App />

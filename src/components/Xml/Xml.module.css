@@ -9,6 +9,10 @@
   flex: 1;
 }
 
+.text {
+  font-family: Tinos, serif;
+}
+
 .xmlContainer {
   flex: 1;
 
