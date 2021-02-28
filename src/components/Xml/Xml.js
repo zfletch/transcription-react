@@ -1,14 +1,10 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import styles from './Xml.module.css';
 
 import AceEditor from 'react-ace';
 import { parseString } from 'xml2js';
-import { Edit, MousePointer, X, Check } from 'react-feather';
-
-import 'ace-builds/src-noconflict/mode-xml';
-import 'ace-builds/src-noconflict/theme-chrome';
-import 'ace-builds/webpack-resolver';
+import { Copy, Clipboard } from 'react-feather';
 
 const format = ({ x, y, width, height }) => (
   [x, y, width, height].map(n => n.toFixed(4)).join(',')
@@ -41,6 +37,18 @@ const renderPlainXml = ({ urn, boxes, activeBox, setActiveBox }) => {
   );
 };
 
+const xmlBoxText = (urn, boxes, activeBox) => {
+  const { x, y, width, height, text } = boxes[activeBox];
+  const attr = `"${urn}@${format({ x, y, width, height })}"`;
+  const escaped = text.replace(/</g, '&lt;').replace(/>/g, '&gt;');
+
+  return `<w facs=${attr}>${escaped}</w>`;
+};
+
+const xmlFullText = (urn, boxes) => {
+  return boxes.map((_, ii) => xmlBoxText(urn, boxes, ii)).join('\n');
+};
+
 const xmlToJson = (xml) => {
   let json;
   parseString(xml, { explicitChildren: true }, (_err, result) => {
@@ -68,9 +76,6 @@ const extractJson = (key, children, boxes) => {
 };
 
 const Xml = ({ urn, xml, setXml, boxes, setBoxes, activeBox, setActiveBox }) => {
-  const [mode, setMode] = useState('select') // select, edit
-  const aceRef = useRef(null);
-
   useEffect(() => {
     const json = xmlToJson(xml)
     const boxes = [];
@@ -87,37 +92,14 @@ const Xml = ({ urn, xml, setXml, boxes, setBoxes, activeBox, setActiveBox }) => 
   return (
     <div className={styles.container}>
       <div className={styles.header}>
-        <div className={mode === 'select' ? styles.activeSelector : styles.disabledSelector}>
-          <MousePointer className={styles.icon} />
+        <div className={(activeBox === undefined || activeBox === null) ? styles.disabledSelector : styles.selector} onMouseDown={() => {navigator.clipboard.writeText(xmlBoxText(urn, boxes, activeBox))}}>
+          <Copy className={styles.icon} />
         </div>
-
-        <div className={mode === 'edit' ? styles.activeSelector : styles.selector} onMouseDown={mode === 'edit' ? null : () => setMode('edit')}>
-          <Edit className={styles.icon} />
-        </div>
-
-        <div className={mode === 'edit' ? styles.selector : styles.disabledSelector} onMouseDown={mode === 'edit' ? () => { setXml(aceRef.current.editor.getValue()); setMode('select') } : null}>
-          <Check className={styles.icon} />
-        </div>
-
-        <div className={mode === 'edit' ? styles.selector : styles.disabledSelector} onMouseDown={mode === 'edit' ? () => setMode('select') : null}>
-          <X className={styles.icon} />
+        <div className={styles.selector} onMouseDown={() => {navigator.clipboard.writeText(xmlFullText(urn, boxes))}}>
+          <Clipboard className={styles.icon} />
         </div>
       </div>
-      {(mode === 'edit') && (
-        <AceEditor
-          ref={aceRef}
-          className={styles.editor}
-          mode="xml"
-          theme="chrome"
-          tabSize={2}
-          height="auto"
-          width="auto"
-          showPrintMargin={false}
-          editorProps={{ $blockScrolling: true }}
-          value={xml}
-        />
-      )}
-      {(mode === 'select') && renderPlainXml({ urn, boxes, activeBox, setActiveBox })}
+      {renderPlainXml({ urn, boxes, activeBox, setActiveBox })}}
     </div>
   );
 };
