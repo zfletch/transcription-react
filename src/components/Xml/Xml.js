@@ -39,7 +39,7 @@ const renderPlainXml = ({ urn, boxes, activeBox, setActiveBox }) => {
 const xmlBoxText = (urn, boxes, activeBox) => {
   const { x, y, width, height, text } = boxes[activeBox];
   const attr = `"${urn}@${format({ x, y, width, height })}"`;
-  const escaped = text.replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  const escaped = (text || '').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 
   return `<w facs=${attr}>${escaped}</w>`;
 };
