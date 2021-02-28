@@ -14,8 +14,8 @@ const Transcription = ({ image, urn, xml, setXml, className, children }) => {
   const [ratio, setRatio] = useState(1);
   const [zoom, setZoom] = useState(2);
   const [viewerState, setViewerState] = useState('draw'); // draw, select
-  const [activeBox, setActiveBox] = useState(0);
-  const [boxes, setBoxes] = useState([{ x: 0.1130, y: 0.0867, width: 0.0706, height: 0.0481 }, { x: 0.2940, y: 0.1554, width: 0.1657, height: 0.0128 }]);
+  const [activeBox, setActiveBox] = useState(null);
+  const [boxes, setBoxes] = useState([])
 
   return (
     <TranscriptionContext.Provider value={{ image, x, y, zoom, height, width, ratio, boxes, setX, setY, setZoom, setHeight, setWidth, setRatio, setBoxes, viewerState, setViewerState, activeBox, setActiveBox, urn, xml, setXml, naturalHeight, naturalWidth, setNaturalHeight, setNaturalWidth }}>

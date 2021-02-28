@@ -12,3 +12,5 @@ ReactDOM.render(
   </React.StrictMode>,
   document.getElementById('root')
 );
+
+window.onbeforeunload = function() { return true; };

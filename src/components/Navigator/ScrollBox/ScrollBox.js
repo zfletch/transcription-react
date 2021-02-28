@@ -70,7 +70,7 @@ const ScrollBox = ({ x, y, zoom, width, height, localWidth, localHeight, offsetL
     return () => {
       window.removeEventListener('mouseup', onMouseUp)
     }
-  }, [])
+  }, [setDrag])
 
   useEffect(() => {
     window.addEventListener('mousemove', onMouseMove);

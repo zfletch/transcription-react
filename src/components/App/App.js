@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { PerseidsHeader, PerseidsFooter } from 'perseids-react-components';
 
 import Editor from '../Transcription/Editor';
 import Navigator from '../Transcription/Navigator';
@@ -6,83 +7,45 @@ import Viewer from '../Transcription/Viewer';
 import Transcription from '../Transcription';
 import Xml from '../Transcription/Xml';
 
+import Home from '../Home';
+
 import styles from './App.module.css';
 
-import philostratus from './latin.jpg';
+const TranscriptionContainer = ({ urn, setUrn, image, xml, setXml }) => (
+  <Transcription className={styles.transcription} urn={urn} image={image} xml={xml} setXml={setXml}>
+    <Viewer />
+    <Editor />
+    <Navigator />
+    <Xml />
+  </Transcription>
+);
 
-const exampleXml = `<TEI xmlns="http://www.tei-c.org/ns/1.0" xml:lang="en">
-  <teiHeader>
-      <fileDesc>
-         <titleStmt>
-            <title>IG II² 12974, Philostratus the son of Philoxenus</title>
-            <editor>
-                <name>Daniel Orazio</name>
-            </editor>
-            <editor>
-                <name>Michael Brown</name>
-            </editor>
-            <editor>
-                <name>Devon Armstrong</name>
-            </editor>
-            <editor role="reviewer">Marie-Claire Beaulieu, Phd.</editor>
-         </titleStmt>
-         <publicationStmt>
-            <authority>Perseus Project</authority>
-            <idno type="urn:cts">urn:cts:ig:ii_2.12974.perseus-grc1</idno>
-            <availability>
-               <p>This work is licensed under a
-          <ref type="license" target="http://creativecommons.org/licenses/by-sa/3.0/">Creative 
-          Commons Attribution-ShareAlike 3.0 License</ref>.</p>
-            </availability>
-         </publicationStmt>
-         <sourceDesc>
-            <p>
-               <bibl></bibl>
-            </p>
-         </sourceDesc>
-      </fileDesc>
-      <profileDesc>
-         <langUsage>
-            <language ident="en">English</language>
-            <language ident="grc">Greek</language>
-         </langUsage>
-      </profileDesc>
-      <revisionDesc>
-          <change when="2014-11-30T14:34:52.01Z" who="http://data.perseus.org/sosol/users/Bridget%20Almas">Finalized - Finalized.</change>
-          <change when="2014-11-30T14:34:52.006Z" who="http://data.perseus.org/sosol/users/Marie-Claire%20B">Vote - Approve - Great!</change>
-          <change when="2014-11-26T22:19:41.364Z" who="http://data.perseus.org/sosol/users/Bridget%20Almas">Adding editors, titles and correcting transcription.</change>
-          <change when="2014-02-06T20:15:23.157Z" who="http://data.perseus.org/sosol/users/Bridget%20Almas%20-%20Tufts%20Account">Finalized - Committing approved version to master repo.</change>
-          <change when="2014-02-06T20:15:23.148Z" who="http://data.perseus.org/sosol/users/Marie-Claire%20B">Vote - Accept - Very good translation! You will get full credit. The second line is tricky to render into English, but I think you did well to emphasize the "kai... te"</change>
-          <change when="2013-12-13T18:39:17.529Z" who="http://data.perseus.org/sosol/users/Dan%20Orazio">transcribed and translated</change>
-          <change when="2013-12-04T20:32:43+00:00" who="http://perseids.org/editor">Automated creation from template</change>
-      </revisionDesc>
-  </teiHeader>
-  <text>
-      <body>
-         <div xml:lang="grc" type="edition" xml:space="preserve">
-      	<lg met="">
-			<l n="1"><supplied reason="lost">Φιλ</supplied><w facs="urn:cite:perseus:funeraryimg.wUdglRwLMJ6@0.2012,0.4199,0.3483,0.0725">όστρατοσ</w> <w facs="urn:cite:perseus:funeraryimg.wUdglRwLMJ6@0.5506,0.435,0.4324,0.0634">Φιλοξένου</w><lb n="1"></lb></l>
-                        <l n="1"><w facs="urn:cite:perseus:funeraryimg.wUdglRwLMJ6@0.0661,0.5166,0.047,0.0453">παῖ</w> <w facs="urn:cite:perseus:funeraryimg.wUdglRwLMJ6@0.1121,0.5227,0.1271,0.0408">πατέρος</w> <w facs="urn:cite:perseus:funeraryimg.wUdglRwLMJ6@0.2402,0.5317,0.1061,0.0438">σαυτοῦ</w> <w facs="urn:cite:perseus:funeraryimg.wUdglRwLMJ6@0.3453,0.5302,0.1211,0.0498">πατρὸς</w> <w facs="urn:cite:perseus:funeraryimg.wUdglRwLMJ6@0.4655,0.5363,0.0871,0.0438">ἔχων</w><lb n="2"></lb></l>
-                        <l n="1"><w facs="urn:cite:perseus:funeraryimg.wUdglRwLMJ6@0.6496,0.5393,0.0551,0.0483">καὶ</w> <w>παραμύθιον</w> <w>ἦσθα</w> <w>παπωνύμιον</w> <w>τε</w> <w>γονεῦσι</w><lb n="3"></lb></l>
-                        <l n="1"><w>Νεολλαρίων</w> <w>δαίμων</w> <w>δέ</w> <w>σ'</w> <w>ἀφείλετο</w> <w>πᾶ(σ)ι</w> <w>ποθεινόν</w><lb n="4"></lb></l>
-</lg>
-</div>
-      </body>
-  </text>
-</TEI>
-`;
+const HomeContainer = ({ xml, setXml, urn, setUrn, image, setImage, mode, setMode }) => (
+  <>
+    <PerseidsHeader>
+      Transcription Editor
+    </PerseidsHeader>
+    <main role="main">
+      <div className="container text-center">
+        <Home xml={xml} setXml={setXml} urn={urn} setUrn={setUrn} image={image} setImage={setImage} mode={mode} setMode={setMode} />;
+      </div>
+    </main>
+    <PerseidsFooter />
+  </>
+);
 
 const App = () => {
-  const [xml, setXml] = useState(exampleXml)
+  const [xml, setXml] = useState('');
+  const [urn, setUrn] = useState('urn:cite:perseus:miscellanyimgs:image');
+  const [image, setImage] = useState('');
+  const [mode, setMode] = useState('input'); // input, edit
 
-  return (
-    <Transcription className={styles.transcription} urn="urn:cite:perseus:miscellanyimgs.UWDkbqJfqQc" image={philostratus} xml={xml} setXml={setXml}>
-      <Viewer />
-      <Editor />
-      <Navigator />
-      <Xml />
-    </Transcription>
-  );
+  if (mode === 'input') {
+    return <HomeContainer xml={xml} setXml={setXml} urn={urn} setUrn={setUrn} image={image} setImage={setImage} mode={mode} setMode={setMode} />;
+  }
+
+  return <TranscriptionContainer urn={urn} setUrn={setUrn} image={image} xml={xml} setXml={setXml} />
 };
+
 
 export default App;

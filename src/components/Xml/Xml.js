@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 
 import styles from './Xml.module.css';
 
-import AceEditor from 'react-ace';
 import { parseString } from 'xml2js';
 import { Copy, Clipboard } from 'react-feather';
 
@@ -77,6 +76,10 @@ const extractJson = (key, children, boxes) => {
 
 const Xml = ({ urn, xml, setXml, boxes, setBoxes, activeBox, setActiveBox }) => {
   useEffect(() => {
+    if (!xml) {
+      return;
+    }
+
     const json = xmlToJson(xml)
     const boxes = [];
     Object.keys(json).forEach((element) => {
@@ -92,10 +95,10 @@ const Xml = ({ urn, xml, setXml, boxes, setBoxes, activeBox, setActiveBox }) => 
   return (
     <div className={styles.container}>
       <div className={styles.header}>
-        <div className={(activeBox === undefined || activeBox === null) ? styles.disabledSelector : styles.selector} onMouseDown={() => {navigator.clipboard.writeText(xmlBoxText(urn, boxes, activeBox))}}>
+        <div title="Copy active line" className={(activeBox === undefined || activeBox === null) ? styles.disabledSelector : styles.selector} onMouseDown={() => {navigator.clipboard.writeText(xmlBoxText(urn, boxes, activeBox))}}>
           <Copy className={styles.icon} />
         </div>
-        <div className={styles.selector} onMouseDown={() => {navigator.clipboard.writeText(xmlFullText(urn, boxes))}}>
+        <div title="Copy all lines" className={styles.selector} onMouseDown={() => {navigator.clipboard.writeText(xmlFullText(urn, boxes))}}>
           <Clipboard className={styles.icon} />
         </div>
       </div>

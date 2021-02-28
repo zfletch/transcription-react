@@ -62,6 +62,7 @@ const Viewer = ({ image, x, y, width, height, zoom, boxes, ratio, setWidth, setH
 
   const onMouseUp = () => {
     if (!selectHeight || !selectWidth) {
+      setSelect(false);
       return;
     }
 
@@ -128,11 +129,11 @@ const Viewer = ({ image, x, y, width, height, zoom, boxes, ratio, setWidth, setH
   return (
     <div className={styles.container}>
       <div className={styles.header}>
-        <div className={mode === 'select' ? styles.activeSelector : styles.selector} onMouseDown={mode === 'select' ? null : () => setMode('select')}>
+        <div title="Select the active box" className={mode === 'select' ? styles.activeSelector : styles.selector} onMouseDown={mode === 'select' ? null : () => setMode('select')}>
           <MousePointer className={styles.icon} />
         </div>
 
-        <div className={mode === 'draw' ? styles.activeSelector : styles.selector} onMouseDown={mode === 'draw' ? null : () => setMode('draw')}>
+        <div title="Draw a new box" className={mode === 'draw' ? styles.activeSelector : styles.selector} onMouseDown={mode === 'draw' ? null : () => setMode('draw')}>
           <Maximize className={styles.icon} />
         </div>
       </div>

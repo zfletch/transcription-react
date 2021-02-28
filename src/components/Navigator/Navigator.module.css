@@ -57,3 +57,17 @@
 .icon {
   height: 100%;
 }
+
+.activeBox {
+  background-color: #edeb66;
+  opacity: 0.4;
+
+  border-color: rgba(0, 0, 0, 0.5);
+
+  position: absolute;
+
+  border-color: rgba(0, 0, 0, 1);
+  border-style: dotted;
+  border-width: 2px;
+  box-sizing: border-box;
+}

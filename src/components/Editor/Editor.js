@@ -74,36 +74,52 @@ const Editor = ({ image, x, y, width, height, boxes, setBoxes, activeBox, setAct
     }
   }
 
+  const renderForm = () => (
+    <>
+      <div className="form-row">
+        <div className="form-group col-md-3">
+          <label htmlFor="inputX">X</label>
+          <input type="number" id="inputX" className="form-control" max="1" min="0" step="0.0001" onChange={(e) => updateField('x', e, parseFloat)} value={selectedBox.x.toFixed(4) || '0'} />
+        </div>
+        <div className="form-group col-md-3">
+          <label htmlFor="inputWidth">Width</label>
+          <input type="number" id="inputWidth" className="form-control" max="1" min="0" step="0.0001" onChange={(e) => updateField('width', e, parseFloat)} value={selectedBox.width.toFixed(4) || '0'} />
+        </div>
+        <div className="form-group col-md-3">
+          <label htmlFor="inputY">Y</label>
+          <input type="number" id="inputY" className="form-control" max="1" min="0" step="0.0001" onChange={(e) => updateField('y', e, parseFloat)} value={selectedBox.y.toFixed(4) || '0'} />
+        </div>
+        <div className="form-group col-md-3">
+          <label htmlFor="inputHeight">Height</label>
+          <input type="number" id="inputHeight" className="form-control" max="1" min="0" step="0.0001" onChange={(e) => updateField('height', e, parseFloat)} value={selectedBox.height.toFixed(4) || '0'} />
+        </div>
+      </div>
+      <div className="form-row">
+        <div className="form-group col-md-8">
+          <label htmlFor="inputText">Text</label>
+          <input type="text" className="form-control" id="inputText" onChange={(e) => updateField('text', e)} value={selectedBox.text || ''} />
+        </div>
+        <div className="form-group col-md-4">
+          <label>Delete</label>
+          <input type="button" id="deleteText" className="btn btn-danger form-control" onClick={deleteBox} value="Delete" />
+        </div>
+      </div>
+    </>
+  );
+
   return (
     <div className={styles.editor}>
       <div>
-        Select box:
-        <select value={activeBox === null ? '' : activeBox} onChange={({ target: { value }}) => setActiveBox(value === '' ? null : parseInt(value))}>
-          <option value="">-</option>
-          {boxes.map((box, ii) => <option key={ii} value={ii}>{ii + 1}{boxes[ii].text !== undefined ? ` - ${boxes[ii].text}` : ''}</option>)}
-        </select>
-        <br />
-        {(selectedBox !== null && selectedBox !== undefined) && (
-          <>
-            Text:
-            <input type="text" onChange={(e) => updateField('text', e)} value={selectedBox.text || ''} />
-            <br />
-            X:
-            <input type="number" max="1" min="0" step="0.0001" onChange={(e) => updateField('x', e, parseFloat)} value={selectedBox.x.toFixed(4) || '0'} />
-            <br />
-            Y:
-            <input type="number" max="1" min="0" step="0.0001" onChange={(e) => updateField('y', e, parseFloat)} value={selectedBox.y.toFixed(4) || '0'} />
-            <br />
-            Width:
-            <input type="number" max="1" min="0" step="0.0001" onChange={(e) => updateField('width', e, parseFloat)} value={selectedBox.width.toFixed(4) || '0'} />
-            <br />
-            Height:
-            <input type="number" max="1" min="0" step="0.0001" onChange={(e) => updateField('height', e, parseFloat)} value={selectedBox.height.toFixed(4) || '0'} />
-            <br />
-            Delete:
-            <input type="button" onClick={deleteBox} value="Delete" />
-          </>
-        )}
+        <form className="mr-4 ml-4 mt-2">
+          <div className="form-group">
+            <label htmlFor="selectActive">Select active</label>
+            <select className="form-control" id="selectActive" value={activeBox === null ? '' : activeBox} onChange={({ target: { value }}) => setActiveBox(value === '' ? null : parseInt(value))}>
+              <option value="">-</option>
+              {boxes.map((box, ii) => <option key={ii} value={ii}>{ii + 1}{boxes[ii].text !== undefined ? ` - ${boxes[ii].text}` : ''}</option>)}
+            </select>
+          </div>
+          {(selectedBox !== null && selectedBox !== undefined) && renderForm()}
+        </form>
       </div>
       <div className={styles.imageWrapper} ref={containerRef}>
         {(selectedBox !== null) && (
