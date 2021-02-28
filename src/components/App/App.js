@@ -76,7 +76,7 @@ const App = () => {
   const [xml, setXml] = useState(exampleXml)
 
   return (
-    <Transcription className={styles.transcription} image={philostratus} xml={xml} setXml={setXml}>
+    <Transcription className={styles.transcription} urn="urn:cite:perseus:miscellanyimgs.UWDkbqJfqQc" image={philostratus} xml={xml} setXml={setXml}>
       <Viewer />
       <Editor />
       <Navigator />

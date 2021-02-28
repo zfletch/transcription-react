@@ -14,7 +14,7 @@ const format = ({ x, y, width, height }) => (
   [x, y, width, height].map(n => n.toFixed(4)).join(',')
 );
 
-const renderPlainXml = ({ boxes, activeBox, setActiveBox }) => {
+const renderPlainXml = ({ urn, boxes, activeBox, setActiveBox }) => {
   return (
     <div className={styles.xmlContainer}>
       <div className={styles.xml}>
@@ -25,7 +25,7 @@ const renderPlainXml = ({ boxes, activeBox, setActiveBox }) => {
             <span className={styles.element}>
               <span className={styles.attribute}>facs</span><span className={styles.equals}>=</span>
               <span className={styles.attributeText}>
-                {`"urn:cite:perseus:miscellanyimgs.UWDkbqJfqQc@${format({ x, y, width, height })}"`}
+                {`"${urn}@${format({ x, y, width, height })}"`}
               </span>
             </span>
             <span className={styles.bracket}>&gt;</span>
@@ -67,7 +67,7 @@ const extractJson = (key, children, boxes) => {
   });
 };
 
-const Xml = ({ xml, setXml, boxes, setBoxes, activeBox, setActiveBox }) => {
+const Xml = ({ urn, xml, setXml, boxes, setBoxes, activeBox, setActiveBox }) => {
   const [mode, setMode] = useState('select') // select, edit
   const aceRef = useRef(null);
 
@@ -117,7 +117,7 @@ const Xml = ({ xml, setXml, boxes, setBoxes, activeBox, setActiveBox }) => {
           value={xml}
         />
       )}
-      {(mode === 'select') && renderPlainXml({ boxes, activeBox, setActiveBox })}
+      {(mode === 'select') && renderPlainXml({ urn, boxes, activeBox, setActiveBox })}
     </div>
   );
 };
