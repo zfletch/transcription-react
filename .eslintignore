@@ -1,0 +1,6 @@
+src/setupTests.js
+src/index.js
+src/serviceWorker.js
+build/
+public/
+config/
