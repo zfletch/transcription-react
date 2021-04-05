@@ -6,7 +6,9 @@ const min = (a, b) => (
   a < b ? a : b
 );
 
-const Editor = ({ image, x, y, width, height, boxes, setBoxes, activeBox, setActiveBox, naturalHeight, naturalWidth }) => {
+const Editor = ({
+  image, x, y, width, height, boxes, setBoxes, activeBox, setActiveBox, naturalHeight, naturalWidth,
+}) => {
   const containerRef = useRef(null);
   const [containerHeight, setContainerHeight] = useState(null);
   const [containerWidth, setContainerWidth] = useState(null);
@@ -34,22 +36,22 @@ const Editor = ({ image, x, y, width, height, boxes, setBoxes, activeBox, setAct
 
   const selectedBox = activeBox === null ? null : boxes[activeBox];
 
-  const updateField = (field, { target: { value }}, transform) => {
+  const updateField = (field, { target: { value } }, transform) => {
     const newBox = {
       x: selectedBox.x,
       y: selectedBox.y,
       height: selectedBox.height,
       width: selectedBox.width,
       text: selectedBox.text,
-    }
+    };
     newBox[field] = transform ? transform(value) : value;
-    const newBoxes = boxes.map((b, ii) => ii === activeBox ? newBox : b);
+    const newBoxes = boxes.map((b, ii) => (ii === activeBox ? newBox : b));
 
     setBoxes(newBoxes);
   };
 
   const deleteBox = () => {
-    const newBoxes = boxes.filter((b, ii) => ii === activeBox ? false : true);
+    const newBoxes = boxes.filter((b, ii) => (ii !== activeBox));
 
     setBoxes(newBoxes);
     setActiveBox(null);
@@ -67,11 +69,11 @@ const Editor = ({ image, x, y, width, height, boxes, setBoxes, activeBox, setAct
 
     style = {
       backgroundImage: `url(${image})`,
-      backgroundPosition: `-${selectedBox.x *  naturalWidth * zoomAmount}px -${selectedBox.y * naturalHeight * zoomAmount}px`,
+      backgroundPosition: `-${selectedBox.x * naturalWidth * zoomAmount}px -${selectedBox.y * naturalHeight * zoomAmount}px`,
       backgroundSize: `${naturalWidth * zoomAmount}px`,
       maxHeight: `${maxHeight}px`,
       maxWidth: `${maxWidth}px`,
-    }
+    };
   }
 
   const renderForm = () => (
@@ -113,9 +115,14 @@ const Editor = ({ image, x, y, width, height, boxes, setBoxes, activeBox, setAct
         <form className="mr-4 ml-4 mt-2">
           <div className="form-group">
             <label htmlFor="selectActive">Select active</label>
-            <select className="form-control" id="selectActive" value={activeBox === null ? '' : activeBox} onChange={({ target: { value }}) => setActiveBox(value === '' ? null : parseInt(value))}>
+            <select className="form-control" id="selectActive" value={activeBox === null ? '' : activeBox} onChange={({ target: { value } }) => setActiveBox(value === '' ? null : parseInt(value))}>
               <option value="">-</option>
-              {boxes.map((box, ii) => <option key={ii} value={ii}>{ii + 1}{boxes[ii].text !== undefined ? ` - ${boxes[ii].text}` : ''}</option>)}
+              {boxes.map((box, ii) => (
+                <option key={ii} value={ii}>
+                  {ii + 1}
+                  {boxes[ii].text !== undefined ? ` - ${boxes[ii].text}` : ''}
+                </option>
+              ))}
             </select>
           </div>
           {(selectedBox !== null && selectedBox !== undefined) && renderForm()}

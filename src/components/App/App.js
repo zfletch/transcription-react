@@ -11,7 +11,9 @@ import Home from '../Home';
 
 import styles from './App.module.css';
 
-const TranscriptionContainer = ({ urn, setUrn, image, xml, setXml }) => (
+const TranscriptionContainer = ({
+  urn, setUrn, image, xml, setXml,
+}) => (
   <Transcription className={styles.transcription} urn={urn} image={image} xml={xml} setXml={setXml}>
     <Viewer />
     <Editor />
@@ -20,14 +22,17 @@ const TranscriptionContainer = ({ urn, setUrn, image, xml, setXml }) => (
   </Transcription>
 );
 
-const HomeContainer = ({ xml, setXml, urn, setUrn, image, setImage, mode, setMode }) => (
+const HomeContainer = ({
+  xml, setXml, urn, setUrn, image, setImage, mode, setMode,
+}) => (
   <>
     <PerseidsHeader>
       Transcription Editor
     </PerseidsHeader>
     <main role="main">
       <div className="container text-center">
-        <Home xml={xml} setXml={setXml} urn={urn} setUrn={setUrn} image={image} setImage={setImage} mode={mode} setMode={setMode} />;
+        <Home xml={xml} setXml={setXml} urn={urn} setUrn={setUrn} image={image} setImage={setImage} mode={mode} setMode={setMode} />
+        ;
       </div>
     </main>
     <PerseidsFooter />
@@ -44,8 +49,7 @@ const App = () => {
     return <HomeContainer xml={xml} setXml={setXml} urn={urn} setUrn={setUrn} image={image} setImage={setImage} mode={mode} setMode={setMode} />;
   }
 
-  return <TranscriptionContainer urn={urn} setUrn={setUrn} image={image} xml={xml} setXml={setXml} />
+  return <TranscriptionContainer urn={urn} setUrn={setUrn} image={image} xml={xml} setXml={setXml} />;
 };
-
 
 export default App;

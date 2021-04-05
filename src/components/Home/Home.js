@@ -16,7 +16,9 @@ const handleChangeFun = (fun) => (
   ({ target: { value } }) => fun(value)
 );
 
-const Home = ({ image, setImage, urn, setUrn, mode, setMode, xml, setXml }) => {
+const Home = ({
+  image, setImage, urn, setUrn, mode, setMode, xml, setXml,
+}) => {
   const aceRef = useRef(null);
 
   const handleImageChange = ({ target: { value } }) => {
@@ -26,7 +28,7 @@ const Home = ({ image, setImage, urn, setUrn, mode, setMode, xml, setXml }) => {
       setUrn(`urn:cite:perseus:miscellanyimgs:${components[components.length - 2]}`);
     }
 
-    setImage(value)
+    setImage(value);
   };
 
   useEffect(() => {
@@ -90,7 +92,7 @@ const Home = ({ image, setImage, urn, setUrn, mode, setMode, xml, setXml }) => {
             />
           </div>
 
-          <button className="btn btn-block btn-primary" disabled={!image} onMouseDown={image ? () => { setMode('edit') } : () => {}}>
+          <button className="btn btn-block btn-primary" disabled={!image} onMouseDown={image ? () => { setMode('edit'); } : () => {}}>
             Edit transcription
           </button>
         </div>

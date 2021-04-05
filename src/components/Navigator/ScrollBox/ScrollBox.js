@@ -33,7 +33,9 @@ const generateStyle = (x, y, zoom, width, height, localWidth, localHeight, offse
   };
 };
 
-const ScrollBox = ({ x, y, zoom, width, height, localWidth, localHeight, offsetLeft, offsetTop, setX, setY }) => {
+const ScrollBox = ({
+  x, y, zoom, width, height, localWidth, localHeight, offsetLeft, offsetTop, setX, setY,
+}) => {
   const [drag, setDrag] = useState(false);
   const [offsetX, setOffsetX] = useState(null);
   const [offsetY, setOffsetY] = useState(null);
@@ -68,17 +70,17 @@ const ScrollBox = ({ x, y, zoom, width, height, localWidth, localHeight, offsetL
     window.addEventListener('mouseup', onMouseUp);
 
     return () => {
-      window.removeEventListener('mouseup', onMouseUp)
-    }
-  }, [setDrag])
+      window.removeEventListener('mouseup', onMouseUp);
+    };
+  }, [setDrag]);
 
   useEffect(() => {
     window.addEventListener('mousemove', onMouseMove);
 
     return () => {
-      window.removeEventListener('mousemove', onMouseMove)
-    }
-  }, [drag])
+      window.removeEventListener('mousemove', onMouseMove);
+    };
+  }, [drag]);
 
   useEffect(() => {
     const boxWidth = localWidth / zoom;
@@ -91,7 +93,7 @@ const ScrollBox = ({ x, y, zoom, width, height, localWidth, localHeight, offsetL
       setX(newX);
       setY(newY);
     }
-  }, [localHeight, localWidth, offsetLeft, offsetTop, zoom])
+  }, [localHeight, localWidth, offsetLeft, offsetTop, zoom]);
 
   return (
     <div

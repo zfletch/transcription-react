@@ -3,7 +3,9 @@ import { MousePointer, Maximize } from 'react-feather';
 
 import styles from './Viewer.module.css';
 
-const Viewer = ({ image, x, y, width, height, zoom, boxes, ratio, setWidth, setHeight, setBoxes, activeBox, setActiveBox }) => {
+const Viewer = ({
+  image, x, y, width, height, zoom, boxes, ratio, setWidth, setHeight, setBoxes, activeBox, setActiveBox,
+}) => {
   const [select, setSelect] = useState(false);
   const [selectX, setSelectX] = useState(null);
   const [selectY, setSelectY] = useState(null);
@@ -35,7 +37,9 @@ const Viewer = ({ image, x, y, width, height, zoom, boxes, ratio, setWidth, setH
     };
   }, []);
 
-  const renderBox = ({ x: boxX, y: boxY, width: boxWidth, height: boxHeight }, index) => {
+  const renderBox = ({
+    x: boxX, y: boxY, width: boxWidth, height: boxHeight,
+  }, index) => {
     const style = {
       top: `${boxY * ratio * width * zoom - y * zoom}px`,
       left: `${boxX * width * zoom - x * zoom}px`,
@@ -54,7 +58,7 @@ const Viewer = ({ image, x, y, width, height, zoom, boxes, ratio, setWidth, setH
       <div
         key={index}
         className={classes.join(' ')}
-        onMouseDown={mode === 'select' ? () => { setActiveBox(index) }: null}
+        onMouseDown={mode === 'select' ? () => { setActiveBox(index); } : null}
         style={style}
       />
     );
@@ -124,7 +128,7 @@ const Viewer = ({ image, x, y, width, height, zoom, boxes, ratio, setWidth, setH
     backgroundImage: `url(${image})`,
     backgroundPosition: `-${zoom * x}px -${zoom * y}px`,
     backgroundSize: `${zoom * 100}%`,
-  }
+  };
 
   return (
     <div className={styles.container}>

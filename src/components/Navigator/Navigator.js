@@ -5,7 +5,9 @@ import Scrollbox from './ScrollBox';
 
 import styles from './Navigator.module.css';
 
-const Navigator = ({ image, x, y, zoom, width, height, setX, setY, setRatio, setZoom, setNaturalHeight, setNaturalWidth, boxes, activeBox }) => {
+const Navigator = ({
+  image, x, y, zoom, width, height, setX, setY, setRatio, setZoom, setNaturalHeight, setNaturalWidth, boxes, activeBox,
+}) => {
   const navigatorRef = useRef(null);
   const imageRef = useRef(null);
   const [localHeight, setLocalHeight] = useState(null);
@@ -47,7 +49,9 @@ const Navigator = ({ image, x, y, zoom, width, height, setX, setY, setRatio, set
   }, [setNaturalHeight, setNaturalWidth, setRatio]);
 
   const renderActiveBox = () => {
-    const { x: boxX, y: boxY, width: boxWidth, height: boxHeight } = boxes[activeBox];
+    const {
+      x: boxX, y: boxY, width: boxWidth, height: boxHeight,
+    } = boxes[activeBox];
 
     const style = {
       top: `${boxY * localHeight + offsetTop}px`,
