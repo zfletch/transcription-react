@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/transcription/static/css/main.08d061a7.chunk.css",
-    "main.js": "/transcription/static/js/main.7e68a9bc.chunk.js",
-    "main.js.map": "/transcription/static/js/main.7e68a9bc.chunk.js.map",
+    "main.css": "/transcription/static/css/main.ce72fa1e.chunk.css",
+    "main.js": "/transcription/static/js/main.235ca6ec.chunk.js",
+    "main.js.map": "/transcription/static/js/main.235ca6ec.chunk.js.map",
     "runtime-main.js": "/transcription/static/js/runtime-main.692a10cf.js",
     "runtime-main.js.map": "/transcription/static/js/runtime-main.692a10cf.js.map",
     "static/css/2.c6bfc29d.chunk.css": "/transcription/static/css/2.c6bfc29d.chunk.css",
-    "static/js/2.36ba4754.chunk.js": "/transcription/static/js/2.36ba4754.chunk.js",
-    "static/js/2.36ba4754.chunk.js.map": "/transcription/static/js/2.36ba4754.chunk.js.map",
+    "static/js/2.dd8cca64.chunk.js": "/transcription/static/js/2.dd8cca64.chunk.js",
+    "static/js/2.dd8cca64.chunk.js.map": "/transcription/static/js/2.dd8cca64.chunk.js.map",
     "mode-livescript.js": "/transcription/00f32d088488515ac84b1ffe7fc0ec0d.js",
     "ftl.js": "/transcription/024358f71f8096dd8052103dced05dbc.js",
     "mode-terraform.js": "/transcription/02a3067bd4d8feab048883fbaff9722c.js",
@@ -424,8 +424,8 @@
     "io.js": "/transcription/ffb285847c77432bb38e9fbf9789d323.js",
     "index.html": "/transcription/index.html",
     "static/css/2.c6bfc29d.chunk.css.map": "/transcription/static/css/2.c6bfc29d.chunk.css.map",
-    "static/css/main.08d061a7.chunk.css.map": "/transcription/static/css/main.08d061a7.chunk.css.map",
-    "static/js/2.36ba4754.chunk.js.LICENSE.txt": "/transcription/static/js/2.36ba4754.chunk.js.LICENSE.txt",
+    "static/css/main.ce72fa1e.chunk.css.map": "/transcription/static/css/main.ce72fa1e.chunk.css.map",
+    "static/js/2.dd8cca64.chunk.js.LICENSE.txt": "/transcription/static/js/2.dd8cca64.chunk.js.LICENSE.txt",
     "static/media/copy-url.229e092a.png": "/transcription/static/media/copy-url.229e092a.png",
     "static/media/edit-transcription.62ebae99.png": "/transcription/static/media/edit-transcription.62ebae99.png",
     "static/media/paste-url.2563f6c9.png": "/transcription/static/media/paste-url.2563f6c9.png",
@@ -434,8 +434,8 @@
   "entrypoints": [
     "static/js/runtime-main.692a10cf.js",
     "static/css/2.c6bfc29d.chunk.css",
-    "static/js/2.36ba4754.chunk.js",
-    "static/css/main.08d061a7.chunk.css",
-    "static/js/main.7e68a9bc.chunk.js"
+    "static/js/2.dd8cca64.chunk.js",
+    "static/css/main.ce72fa1e.chunk.css",
+    "static/js/main.235ca6ec.chunk.js"
   ]
 }
