@@ -1,0 +1,111 @@
+.xml {
+  background-color: #f2f2f2;
+  overflow: scroll;
+  text-align: left;
+  white-space: pre-line;
+
+  padding: 1rem;
+
+  flex: 1;
+}
+
+.text {
+  font-family: Tinos, serif;
+  cursor: pointer;
+}
+
+.xmlContainer {
+  flex: 1;
+
+  overflow: auto;
+
+  display: flex;
+}
+
+.line {
+  display: table;
+  cursor: pointer;
+}
+
+.line:hover {
+  background-color: #5bc8dc;
+}
+
+.active {
+  background-color: #edeb66;
+}
+
+.bracket {
+  color: #930f80;
+}
+
+.element {
+  color: #000000;
+}
+
+.attribute {
+  color: #994409;
+}
+
+.equals {
+  color: #687687;
+}
+
+.attributeText {
+  color: #1a1aa6;
+}
+
+
+.container {
+  display: flex;
+  flex-direction: column;
+
+  overflow: auto;
+}
+
+.header {
+  background-color: rgb(242, 242, 242);
+  padding: 0.2rem;
+  margin-top: 0.1rem;
+  margin-bottom: 0.1rem;
+  padding-right: 0.3rem;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  column-gap: 0.2rem;
+}
+
+.editor {
+  flex: 1;
+}
+
+.selector {
+  cursor: pointer;
+  padding-left: 0.1rem;
+  padding-right: 0.1rem;
+}
+
+.selector:hover {
+  background-color: #5bc8dc;
+}
+
+.selector:active {
+  background-color: #c4c4c4;
+}
+
+.icon {
+  height: 100%;
+}
+
+.activeSelector {
+  background-color: #c4c4c4;
+  padding-left: 0.1rem;
+  padding-right: 0.1rem;
+}
+
+.disabledSelector {
+  color: #ababab;
+  padding-left: 0.1rem;
+  padding-right: 0.1rem;
+}

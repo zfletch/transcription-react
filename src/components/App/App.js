@@ -8,6 +8,7 @@ import Viewer from '../Transcription/Viewer';
 import Transcription from '../Transcription';
 import Xml from '../Transcription/Xml';
 import XmlTranscribed from '../Transcription/XmlTranscribed';
+import Translation from '../Transcription/Translation';
 
 import { xml as nuremberg } from '../../data/nuremberg';
 
@@ -37,6 +38,7 @@ const HomeContainer = ({
             <Viewer />
             <Navigator />
             <XmlTranscribed />
+            <Translation />
           </Transcription>
         </Route>
         <Route path="/">
