@@ -20,7 +20,7 @@ const renderPlainXml = ({
       }, ii) => (
         <div key={ii} className={ii === activeBox ? [styles.active, styles.line].join(' ') : styles.line} onClick={() => setActiveBox(ii)}>
           <span className={styles.bracket}>&lt;w</span>
-          {' '}
+          &nbsp;
           <span className={styles.element}>
             <span className={styles.attribute}>facs</span>
             <span className={styles.equals}>=</span>
